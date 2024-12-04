@@ -121,7 +121,7 @@ sum_function = Function(
                 ),
             ),
         ),
-        Return(8, Variable("x")),
+        Return(8, Variable("sum")),
     ),
 )
 
