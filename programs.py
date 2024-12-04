@@ -84,6 +84,47 @@ simple_if = Function(
     ),
 )
 
+sum_function = Function(
+    "sum",
+    ("x",),
+    frozenset({"i", "sum"}),
+    (
+        Assignment(
+            2,
+            Variable("i"),
+            IntConstant(0),
+        ),
+        Assignment(
+            3,
+            Variable("sum"),
+            IntConstant(0),
+        ),
+        While(
+            4,
+            IntComparisonExpression(
+                Variable("i"), IntComparisonOperator.LT, Variable("x")
+            ),
+            (
+                Assignment(
+                    5,
+                    Variable("sum"),
+                    IntBinaryExpression(
+                        Variable("sum"), IntBinaryOperator.ADD, Variable("i")
+                    ),
+                ),
+                Assignment(
+                    6,
+                    Variable("i"),
+                    IntBinaryExpression(
+                        Variable("i"), IntBinaryOperator.ADD, IntConstant(1)
+                    ),
+                ),
+            ),
+        ),
+        Return(8, Variable("x")),
+    ),
+)
+
 nested_if = Function(
     "nested_if",
     (),
