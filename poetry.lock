@@ -437,7 +437,7 @@ types-networkx = ">=2.6"
 type = "git"
 url = "https://github.com/BergLucas/manim-dataflow-analysis"
 reference = "HEAD"
-resolved_reference = "42c8bdce8a035812146939ff91e42e30f9c733cf"
+resolved_reference = "48d5ea7db49bd95fb29ac39f6b8afe88b2e22311"
 
 [[package]]
 name = "manimpango"
