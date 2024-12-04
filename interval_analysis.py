@@ -5,8 +5,7 @@ from functools import total_ordering
 from typing import Any, Iterable
 
 from manim import *
-from manim_dataflow_analysis.lattice import Lattice
-from manim_dataflow_analysis.scene import AbstractAnalysisScene
+from manim_dataflow_analysis import *
 
 from programs import *
 from small import *
