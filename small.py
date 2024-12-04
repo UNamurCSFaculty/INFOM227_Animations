@@ -4,8 +4,7 @@ from dataclasses import dataclass
 from enum import StrEnum
 
 import networkx as nx
-from manim_dataflow_analysis.ast import AstFunction, AstStatement
-from manim_dataflow_analysis.cfg import ProgramPoint
+from manim_dataflow_analysis import *
 
 # Expressions
 

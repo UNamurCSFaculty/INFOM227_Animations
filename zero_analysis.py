@@ -4,10 +4,7 @@ from enum import StrEnum
 from typing import TYPE_CHECKING
 
 from manim import *
-from manim_dataflow_analysis.condition_update_function import ConditionUpdateFunction
-from manim_dataflow_analysis.flow_function import ControlFlowFunction, FlowFunction
-from manim_dataflow_analysis.lattice import FiniteSizeLattice
-from manim_dataflow_analysis.scene import AbstractAnalysisScene
+from manim_dataflow_analysis import *
 
 from programs import *
 from small import *
