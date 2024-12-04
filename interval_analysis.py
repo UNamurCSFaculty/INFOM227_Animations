@@ -1,12 +1,14 @@
 from __future__ import annotations
 
-from manim_dataflow_analysis.scene import AbstractAnalysisScene
-from manim_dataflow_analysis.lattice import Lattice
-from typing import Iterable, Any
-from functools import total_ordering
 from enum import StrEnum
-from programs import *
+from functools import total_ordering
+from typing import Any, Iterable
+
 from manim import *
+from manim_dataflow_analysis.lattice import Lattice
+from manim_dataflow_analysis.scene import AbstractAnalysisScene
+
+from programs import *
 from small import *
 
 
@@ -226,7 +228,6 @@ class IntervalAnalysisLattice(Lattice[IntervalAnalysisValue]):
 class IntervalAnalysisScene(
     AbstractAnalysisScene[IntervalAnalysisValue, BoolExpression]
 ):
-
     title = "Interval Analysis example"
 
     sorting_function = sorted

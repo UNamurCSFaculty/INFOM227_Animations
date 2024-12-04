@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from manim_dataflow_analysis.cfg import ProgramPoint
-from manim_dataflow_analysis.ast import AstFunction, AstStatement
 from enum import StrEnum
+
 import networkx as nx
+from manim_dataflow_analysis.ast import AstFunction, AstStatement
+from manim_dataflow_analysis.cfg import ProgramPoint
 
 # Expressions
 
@@ -162,8 +163,10 @@ Expression = IntExpression | BoolExpression
 def sequence_cfg(
     statements: tuple[Statement, ...],
     previous_statements: list[tuple[Statement, BoolExpression, int | None]],
-) -> tuple[list[tuple[Statement, BoolExpression, int | None]], nx.DiGraph]:
-    graph = nx.DiGraph()
+) -> tuple[
+    list[tuple[Statement, BoolExpression, int | None]], nx.DiGraph[ProgramPoint]
+]:
+    graph: nx.DiGraph[ProgramPoint] = nx.DiGraph()
 
     for statement in statements:
         for previous_statement, condition, edge_case in previous_statements:
@@ -257,12 +260,12 @@ class While(AstStatement):
             self.body, [(self, self.condition, True)]
         )
 
-        for previous_statement, edge_case in previous_statements:
+        for previous_statement, condition, edge_case in previous_statements:
             graph.add_edge(
                 ProgramPoint(previous_statement.line_number, previous_statement),
                 ProgramPoint(self.line_number, self),
                 case=edge_case,
-                condition=self.condition.neg(),
+                condition=condition,
             )
 
         return [(self, BoolConstant(True), False)], graph
@@ -300,7 +303,6 @@ Statement = Assignment | IfElse | While
 
 @dataclass(frozen=True)
 class Function(AstFunction):
-
     name: str = "main"
     parameters: tuple[str, ...] = ()
     variables: frozenset[str] = frozenset()

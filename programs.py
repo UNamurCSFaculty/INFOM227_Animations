@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from small import *
 
-
 if_in_while = Function(
     "if_in_while",
     (),
@@ -124,7 +123,7 @@ nested_if = Function(
                     ),
                 ),
             ),
-            tuple(),
+            (),
         ),
         Return(6, Variable("y")),
     ),

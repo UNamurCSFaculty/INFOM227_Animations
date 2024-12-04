@@ -1,14 +1,19 @@
 from __future__ import annotations
 
-from manim_dataflow_analysis.scene import AbstractAnalysisScene
-from manim_dataflow_analysis.lattice import FiniteSizeLattice
-from manim_dataflow_analysis.abstract_environment import AbstractEnvironment
-from manim_dataflow_analysis.flow_function import FlowFunction, ControlFlowFunction
-from manim_dataflow_analysis.condition_update_function import ConditionUpdateFunction
 from enum import StrEnum
-from programs import *
+from typing import TYPE_CHECKING
+
 from manim import *
+from manim_dataflow_analysis.condition_update_function import ConditionUpdateFunction
+from manim_dataflow_analysis.flow_function import ControlFlowFunction, FlowFunction
+from manim_dataflow_analysis.lattice import FiniteSizeLattice
+from manim_dataflow_analysis.scene import AbstractAnalysisScene
+
+from programs import *
 from small import *
+
+if TYPE_CHECKING:
+    from manim_dataflow_analysis.abstract_environment import AbstractEnvironment
 
 
 class ZeroAnalysisValue(StrEnum):
@@ -192,7 +197,7 @@ class ZeroAnalysisControlFlowFunction(ControlFlowFunction[ZeroAnalysisValue]):
         (
             r"fg [[ p ]] (\phi)",
             r"\phi",
-            r"P[p] \equiv \text{while (E)} \lor P[p] \equiv \text{if (E)} \lor P[p] \equiv \text{return E}",
+            r"P[p] \equiv \text{while (E)} \lor P[p] \equiv \text{if (E)} \lor P[p] \equiv \text{return E}",  # noqa: E501
         ),
     ]
 
@@ -448,7 +453,6 @@ class ZeroAnalysisConditionUpdateFunction(
 
 
 class ZeroAnalysisScene(AbstractAnalysisScene[ZeroAnalysisValue, BoolExpression]):
-
     title = "Zero Analysis example"
 
     program = simple_if
