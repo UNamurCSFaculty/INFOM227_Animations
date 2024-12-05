@@ -233,10 +233,10 @@ class IfElse(AstStatement):
     def __str__(self) -> str:
         return "%s {\n\t%s\n} else {\n\t%s\n}" % (
             self.header,
-            "\n".join(
+            "\n\t".join(
                 str(statement).replace("\n", "\n\t") for statement in self.if_body
             ),
-            "\n".join(
+            "\n\t".join(
                 str(statement).replace("\n", "\n\t") for statement in self.else_body
             ),
         )
@@ -272,7 +272,9 @@ class While(AstStatement):
     def __str__(self) -> str:
         return "%s {\n\t%s\n}" % (
             self.header,
-            "\n".join(str(statement).replace("\n", "\n\t") for statement in self.body),
+            "\n\t".join(
+                str(statement).replace("\n", "\n\t") for statement in self.body
+            ),
         )
 
 
