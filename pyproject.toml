@@ -10,6 +10,7 @@ packages = [{ include = "*" }]
 python = ">=3.11,<3.13"
 manim = "^0.18.1"
 manim-dataflow-analysis = { git = "https://github.com/BergLucas/manim-dataflow-analysis" }
+antlr4-python3-runtime = "^4.13.2"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
