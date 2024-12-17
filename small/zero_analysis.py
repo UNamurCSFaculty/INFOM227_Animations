@@ -6,8 +6,8 @@ from typing import TYPE_CHECKING
 from manim import *
 from manim_dataflow_analysis import *
 
-from programs import *
-from small import *
+from ..programs import *
+from small.ast import *
 
 if TYPE_CHECKING:
     from manim_dataflow_analysis.abstract_environment import AbstractEnvironment
