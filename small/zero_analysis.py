@@ -445,6 +445,8 @@ class ZeroAnalysisConditionUpdateFunction(
 class AbstractZeroAnalysisScene(
     AbstractAnalysisScene[ZeroAnalysisValue, BoolExpression]
 ):
+    title = "Zero Analysis"
+
     lattice = FiniteSizeLattice(
         (ZeroAnalysisValue.BOTTOM, ZeroAnalysisValue.Z),
         (ZeroAnalysisValue.BOTTOM, ZeroAnalysisValue.NZ),
