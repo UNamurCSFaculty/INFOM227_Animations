@@ -94,9 +94,7 @@ program: function*;
 
 function: FUNCTION IDENTIFIER LPAR paramList? RPAR stmtList;
 
-paramList: param (COMMA param)*;
-
-param: IDENTIFIER;
+paramList: IDENTIFIER (COMMA IDENTIFIER)*;
 
 // Statements
 
