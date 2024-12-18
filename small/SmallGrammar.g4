@@ -117,6 +117,10 @@ sequence: stmt | LBRACE stmtList RBRACE;
 
 // Expressions
 
+exprList: expr (COMMA expr)*;
+
+funcCall: IDENTIFIER LPAR exprList? RPAR;
+
 expr: arithExpr | boolExpr;
 
 arithExpr: noprnd | binMathOp;
@@ -132,10 +136,6 @@ relOp: left = boprnd nop right = boprnd;
 noprnd: IDENTIFIER | NUM;
 
 boprnd: IDENTIFIER | TRUE | FALSE;
-
-exprList: expr (COMMA expr)*;
-
-funcCall: IDENTIFIER LPAR exprList? RPAR;
 
 // Operators
 
