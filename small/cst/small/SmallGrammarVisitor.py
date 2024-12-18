@@ -29,6 +29,16 @@ class SmallGrammarVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by SmallGrammarParser#sequence.
+    def visitSequence(self, ctx:SmallGrammarParser.SequenceContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SmallGrammarParser#stmtList.
+    def visitStmtList(self, ctx:SmallGrammarParser.StmtListContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by SmallGrammarParser#stmt.
     def visitStmt(self, ctx:SmallGrammarParser.StmtContext):
         return self.visitChildren(ctx)
@@ -51,16 +61,6 @@ class SmallGrammarVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by SmallGrammarParser#returnStmt.
     def visitReturnStmt(self, ctx:SmallGrammarParser.ReturnStmtContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by SmallGrammarParser#stmtList.
-    def visitStmtList(self, ctx:SmallGrammarParser.StmtListContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by SmallGrammarParser#sequence.
-    def visitSequence(self, ctx:SmallGrammarParser.SequenceContext):
         return self.visitChildren(ctx)
 
 

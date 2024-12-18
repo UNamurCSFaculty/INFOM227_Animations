@@ -100,6 +100,10 @@ param: IDENTIFIER;
 
 // Statements
 
+sequence: stmt | LBRACE stmtList RBRACE;
+
+stmtList: stmt*;
+
 stmt: assignStmt | ifStmt | whileStmt | returnStmt;
 
 assignStmt: IDENTIFIER EQUAL (expr | funcCall) SEMICOLON;
@@ -110,10 +114,6 @@ ifStmt:
 whileStmt: WHILE LPAR boolExpr RPAR sequence;
 
 returnStmt: RETURN expr SEMICOLON;
-
-stmtList: stmt*;
-
-sequence: stmt | LBRACE stmtList RBRACE;
 
 // Expressions
 
