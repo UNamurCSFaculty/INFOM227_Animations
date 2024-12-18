@@ -92,7 +92,8 @@ WS: [ \t]+ -> skip;
 
 program: function*;
 
-function: FUNCTION IDENTIFIER LPAR paramList? RPAR stmtList;
+function:
+	FUNCTION IDENTIFIER LPAR paramList? RPAR LBRACE stmtList RBRACE;
 
 paramList: IDENTIFIER (COMMA IDENTIFIER)*;
 
