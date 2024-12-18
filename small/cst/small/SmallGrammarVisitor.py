@@ -64,6 +64,16 @@ class SmallGrammarVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by SmallGrammarParser#exprList.
+    def visitExprList(self, ctx:SmallGrammarParser.ExprListContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SmallGrammarParser#funcCall.
+    def visitFuncCall(self, ctx:SmallGrammarParser.FuncCallContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by SmallGrammarParser#expr.
     def visitExpr(self, ctx:SmallGrammarParser.ExprContext):
         return self.visitChildren(ctx)
@@ -101,16 +111,6 @@ class SmallGrammarVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by SmallGrammarParser#boprnd.
     def visitBoprnd(self, ctx:SmallGrammarParser.BoprndContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by SmallGrammarParser#exprList.
-    def visitExprList(self, ctx:SmallGrammarParser.ExprListContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by SmallGrammarParser#funcCall.
-    def visitFuncCall(self, ctx:SmallGrammarParser.FuncCallContext):
         return self.visitChildren(ctx)
 
 

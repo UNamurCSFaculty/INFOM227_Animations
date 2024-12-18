@@ -18,52 +18,52 @@ def serializedATN():
         10,2,12,2,70,9,2,1,3,1,3,1,4,1,4,1,4,1,4,3,4,78,8,4,1,5,1,5,1,5,
         1,5,3,5,84,8,5,1,5,1,5,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,7,1,7,1,
         7,1,7,1,7,1,7,1,8,1,8,1,8,1,8,1,9,5,9,107,8,9,10,9,12,9,110,9,9,
-        1,10,1,10,1,10,1,10,1,10,3,10,117,8,10,1,11,1,11,3,11,121,8,11,1,
-        12,1,12,3,12,125,8,12,1,13,1,13,1,13,3,13,130,8,13,1,14,1,14,1,14,
-        1,14,1,15,1,15,1,15,1,15,1,16,1,16,1,16,1,16,1,17,1,17,1,18,1,18,
-        1,19,1,19,1,19,5,19,151,8,19,10,19,12,19,154,9,19,1,20,1,20,1,20,
-        3,20,159,8,20,1,20,1,20,1,21,1,21,1,22,1,22,1,23,1,23,1,23,0,0,24,
-        0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,
-        46,0,5,1,0,27,28,2,0,25,26,28,28,1,0,15,18,1,0,19,24,2,0,13,14,23,
-        24,159,0,51,1,0,0,0,2,54,1,0,0,0,4,63,1,0,0,0,6,71,1,0,0,0,8,77,
-        1,0,0,0,10,79,1,0,0,0,12,87,1,0,0,0,14,95,1,0,0,0,16,101,1,0,0,0,
-        18,108,1,0,0,0,20,116,1,0,0,0,22,120,1,0,0,0,24,124,1,0,0,0,26,129,
-        1,0,0,0,28,131,1,0,0,0,30,135,1,0,0,0,32,139,1,0,0,0,34,143,1,0,
-        0,0,36,145,1,0,0,0,38,147,1,0,0,0,40,155,1,0,0,0,42,162,1,0,0,0,
-        44,164,1,0,0,0,46,166,1,0,0,0,48,50,3,2,1,0,49,48,1,0,0,0,50,53,
-        1,0,0,0,51,49,1,0,0,0,51,52,1,0,0,0,52,1,1,0,0,0,53,51,1,0,0,0,54,
-        55,5,4,0,0,55,56,5,28,0,0,56,58,5,8,0,0,57,59,3,4,2,0,58,57,1,0,
-        0,0,58,59,1,0,0,0,59,60,1,0,0,0,60,61,5,9,0,0,61,62,3,18,9,0,62,
-        3,1,0,0,0,63,68,3,6,3,0,64,65,5,10,0,0,65,67,3,6,3,0,66,64,1,0,0,
-        0,67,70,1,0,0,0,68,66,1,0,0,0,68,69,1,0,0,0,69,5,1,0,0,0,70,68,1,
-        0,0,0,71,72,5,28,0,0,72,7,1,0,0,0,73,78,3,10,5,0,74,78,3,12,6,0,
-        75,78,3,14,7,0,76,78,3,16,8,0,77,73,1,0,0,0,77,74,1,0,0,0,77,75,
-        1,0,0,0,77,76,1,0,0,0,78,9,1,0,0,0,79,80,5,28,0,0,80,83,5,23,0,0,
-        81,84,3,22,11,0,82,84,3,40,20,0,83,81,1,0,0,0,83,82,1,0,0,0,84,85,
-        1,0,0,0,85,86,5,11,0,0,86,11,1,0,0,0,87,88,5,1,0,0,88,89,5,8,0,0,
-        89,90,3,26,13,0,90,91,5,9,0,0,91,92,3,20,10,0,92,93,5,2,0,0,93,94,
-        3,20,10,0,94,13,1,0,0,0,95,96,5,3,0,0,96,97,5,8,0,0,97,98,3,26,13,
-        0,98,99,5,9,0,0,99,100,3,20,10,0,100,15,1,0,0,0,101,102,5,5,0,0,
-        102,103,3,22,11,0,103,104,5,11,0,0,104,17,1,0,0,0,105,107,3,8,4,
-        0,106,105,1,0,0,0,107,110,1,0,0,0,108,106,1,0,0,0,108,109,1,0,0,
-        0,109,19,1,0,0,0,110,108,1,0,0,0,111,117,3,8,4,0,112,113,5,6,0,0,
-        113,114,3,18,9,0,114,115,5,7,0,0,115,117,1,0,0,0,116,111,1,0,0,0,
-        116,112,1,0,0,0,117,21,1,0,0,0,118,121,3,24,12,0,119,121,3,26,13,
-        0,120,118,1,0,0,0,120,119,1,0,0,0,121,23,1,0,0,0,122,125,3,34,17,
-        0,123,125,3,28,14,0,124,122,1,0,0,0,124,123,1,0,0,0,125,25,1,0,0,
-        0,126,130,3,36,18,0,127,130,3,32,16,0,128,130,3,30,15,0,129,126,
-        1,0,0,0,129,127,1,0,0,0,129,128,1,0,0,0,130,27,1,0,0,0,131,132,3,
-        34,17,0,132,133,3,42,21,0,133,134,3,34,17,0,134,29,1,0,0,0,135,136,
-        3,34,17,0,136,137,3,44,22,0,137,138,3,34,17,0,138,31,1,0,0,0,139,
-        140,3,36,18,0,140,141,3,46,23,0,141,142,3,36,18,0,142,33,1,0,0,0,
-        143,144,7,0,0,0,144,35,1,0,0,0,145,146,7,1,0,0,146,37,1,0,0,0,147,
-        152,3,22,11,0,148,149,5,10,0,0,149,151,3,22,11,0,150,148,1,0,0,0,
-        151,154,1,0,0,0,152,150,1,0,0,0,152,153,1,0,0,0,153,39,1,0,0,0,154,
-        152,1,0,0,0,155,156,5,28,0,0,156,158,5,8,0,0,157,159,3,38,19,0,158,
-        157,1,0,0,0,158,159,1,0,0,0,159,160,1,0,0,0,160,161,5,9,0,0,161,
-        41,1,0,0,0,162,163,7,2,0,0,163,43,1,0,0,0,164,165,7,3,0,0,165,45,
-        1,0,0,0,166,167,7,4,0,0,167,47,1,0,0,0,12,51,58,68,77,83,108,116,
-        120,124,129,152,158
+        1,10,1,10,1,10,1,10,1,10,3,10,117,8,10,1,11,1,11,1,11,5,11,122,8,
+        11,10,11,12,11,125,9,11,1,12,1,12,1,12,3,12,130,8,12,1,12,1,12,1,
+        13,1,13,3,13,136,8,13,1,14,1,14,3,14,140,8,14,1,15,1,15,1,15,3,15,
+        145,8,15,1,16,1,16,1,16,1,16,1,17,1,17,1,17,1,17,1,18,1,18,1,18,
+        1,18,1,19,1,19,1,20,1,20,1,21,1,21,1,22,1,22,1,23,1,23,1,23,0,0,
+        24,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,
+        44,46,0,5,1,0,27,28,2,0,25,26,28,28,1,0,15,18,1,0,19,24,2,0,13,14,
+        23,24,159,0,51,1,0,0,0,2,54,1,0,0,0,4,63,1,0,0,0,6,71,1,0,0,0,8,
+        77,1,0,0,0,10,79,1,0,0,0,12,87,1,0,0,0,14,95,1,0,0,0,16,101,1,0,
+        0,0,18,108,1,0,0,0,20,116,1,0,0,0,22,118,1,0,0,0,24,126,1,0,0,0,
+        26,135,1,0,0,0,28,139,1,0,0,0,30,144,1,0,0,0,32,146,1,0,0,0,34,150,
+        1,0,0,0,36,154,1,0,0,0,38,158,1,0,0,0,40,160,1,0,0,0,42,162,1,0,
+        0,0,44,164,1,0,0,0,46,166,1,0,0,0,48,50,3,2,1,0,49,48,1,0,0,0,50,
+        53,1,0,0,0,51,49,1,0,0,0,51,52,1,0,0,0,52,1,1,0,0,0,53,51,1,0,0,
+        0,54,55,5,4,0,0,55,56,5,28,0,0,56,58,5,8,0,0,57,59,3,4,2,0,58,57,
+        1,0,0,0,58,59,1,0,0,0,59,60,1,0,0,0,60,61,5,9,0,0,61,62,3,18,9,0,
+        62,3,1,0,0,0,63,68,3,6,3,0,64,65,5,10,0,0,65,67,3,6,3,0,66,64,1,
+        0,0,0,67,70,1,0,0,0,68,66,1,0,0,0,68,69,1,0,0,0,69,5,1,0,0,0,70,
+        68,1,0,0,0,71,72,5,28,0,0,72,7,1,0,0,0,73,78,3,10,5,0,74,78,3,12,
+        6,0,75,78,3,14,7,0,76,78,3,16,8,0,77,73,1,0,0,0,77,74,1,0,0,0,77,
+        75,1,0,0,0,77,76,1,0,0,0,78,9,1,0,0,0,79,80,5,28,0,0,80,83,5,23,
+        0,0,81,84,3,26,13,0,82,84,3,24,12,0,83,81,1,0,0,0,83,82,1,0,0,0,
+        84,85,1,0,0,0,85,86,5,11,0,0,86,11,1,0,0,0,87,88,5,1,0,0,88,89,5,
+        8,0,0,89,90,3,30,15,0,90,91,5,9,0,0,91,92,3,20,10,0,92,93,5,2,0,
+        0,93,94,3,20,10,0,94,13,1,0,0,0,95,96,5,3,0,0,96,97,5,8,0,0,97,98,
+        3,30,15,0,98,99,5,9,0,0,99,100,3,20,10,0,100,15,1,0,0,0,101,102,
+        5,5,0,0,102,103,3,26,13,0,103,104,5,11,0,0,104,17,1,0,0,0,105,107,
+        3,8,4,0,106,105,1,0,0,0,107,110,1,0,0,0,108,106,1,0,0,0,108,109,
+        1,0,0,0,109,19,1,0,0,0,110,108,1,0,0,0,111,117,3,8,4,0,112,113,5,
+        6,0,0,113,114,3,18,9,0,114,115,5,7,0,0,115,117,1,0,0,0,116,111,1,
+        0,0,0,116,112,1,0,0,0,117,21,1,0,0,0,118,123,3,26,13,0,119,120,5,
+        10,0,0,120,122,3,26,13,0,121,119,1,0,0,0,122,125,1,0,0,0,123,121,
+        1,0,0,0,123,124,1,0,0,0,124,23,1,0,0,0,125,123,1,0,0,0,126,127,5,
+        28,0,0,127,129,5,8,0,0,128,130,3,22,11,0,129,128,1,0,0,0,129,130,
+        1,0,0,0,130,131,1,0,0,0,131,132,5,9,0,0,132,25,1,0,0,0,133,136,3,
+        28,14,0,134,136,3,30,15,0,135,133,1,0,0,0,135,134,1,0,0,0,136,27,
+        1,0,0,0,137,140,3,38,19,0,138,140,3,32,16,0,139,137,1,0,0,0,139,
+        138,1,0,0,0,140,29,1,0,0,0,141,145,3,40,20,0,142,145,3,36,18,0,143,
+        145,3,34,17,0,144,141,1,0,0,0,144,142,1,0,0,0,144,143,1,0,0,0,145,
+        31,1,0,0,0,146,147,3,38,19,0,147,148,3,42,21,0,148,149,3,38,19,0,
+        149,33,1,0,0,0,150,151,3,38,19,0,151,152,3,44,22,0,152,153,3,38,
+        19,0,153,35,1,0,0,0,154,155,3,40,20,0,155,156,3,46,23,0,156,157,
+        3,40,20,0,157,37,1,0,0,0,158,159,7,0,0,0,159,39,1,0,0,0,160,161,
+        7,1,0,0,161,41,1,0,0,0,162,163,7,2,0,0,163,43,1,0,0,0,164,165,7,
+        3,0,0,165,45,1,0,0,0,166,167,7,4,0,0,167,47,1,0,0,0,12,51,58,68,
+        77,83,108,116,123,129,135,139,144
     ]
 
 class SmallGrammarParser ( Parser ):
@@ -100,25 +100,25 @@ class SmallGrammarParser ( Parser ):
     RULE_returnStmt = 8
     RULE_stmtList = 9
     RULE_sequence = 10
-    RULE_expr = 11
-    RULE_arithExpr = 12
-    RULE_boolExpr = 13
-    RULE_binMathOp = 14
-    RULE_binLogicOp = 15
-    RULE_relOp = 16
-    RULE_noprnd = 17
-    RULE_boprnd = 18
-    RULE_exprList = 19
-    RULE_funcCall = 20
+    RULE_exprList = 11
+    RULE_funcCall = 12
+    RULE_expr = 13
+    RULE_arithExpr = 14
+    RULE_boolExpr = 15
+    RULE_binMathOp = 16
+    RULE_binLogicOp = 17
+    RULE_relOp = 18
+    RULE_noprnd = 19
+    RULE_boprnd = 20
     RULE_mathOp = 21
     RULE_logicOp = 22
     RULE_nop = 23
 
     ruleNames =  [ "program", "function", "paramList", "param", "stmt", 
                    "assignStmt", "ifStmt", "whileStmt", "returnStmt", "stmtList", 
-                   "sequence", "expr", "arithExpr", "boolExpr", "binMathOp", 
-                   "binLogicOp", "relOp", "noprnd", "boprnd", "exprList", 
-                   "funcCall", "mathOp", "logicOp", "nop" ]
+                   "sequence", "exprList", "funcCall", "expr", "arithExpr", 
+                   "boolExpr", "binMathOp", "binLogicOp", "relOp", "noprnd", 
+                   "boprnd", "mathOp", "logicOp", "nop" ]
 
     EOF = Token.EOF
     IF=1
@@ -837,6 +837,130 @@ class SmallGrammarParser ( Parser ):
         return localctx
 
 
+    class ExprListContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def expr(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(SmallGrammarParser.ExprContext)
+            else:
+                return self.getTypedRuleContext(SmallGrammarParser.ExprContext,i)
+
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(SmallGrammarParser.COMMA)
+            else:
+                return self.getToken(SmallGrammarParser.COMMA, i)
+
+        def getRuleIndex(self):
+            return SmallGrammarParser.RULE_exprList
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprList" ):
+                return visitor.visitExprList(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def exprList(self):
+
+        localctx = SmallGrammarParser.ExprListContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 22, self.RULE_exprList)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 118
+            self.expr()
+            self.state = 123
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while _la==10:
+                self.state = 119
+                self.match(SmallGrammarParser.COMMA)
+                self.state = 120
+                self.expr()
+                self.state = 125
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class FuncCallContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def IDENTIFIER(self):
+            return self.getToken(SmallGrammarParser.IDENTIFIER, 0)
+
+        def LPAR(self):
+            return self.getToken(SmallGrammarParser.LPAR, 0)
+
+        def RPAR(self):
+            return self.getToken(SmallGrammarParser.RPAR, 0)
+
+        def exprList(self):
+            return self.getTypedRuleContext(SmallGrammarParser.ExprListContext,0)
+
+
+        def getRuleIndex(self):
+            return SmallGrammarParser.RULE_funcCall
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitFuncCall" ):
+                return visitor.visitFuncCall(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def funcCall(self):
+
+        localctx = SmallGrammarParser.FuncCallContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 24, self.RULE_funcCall)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 126
+            self.match(SmallGrammarParser.IDENTIFIER)
+            self.state = 127
+            self.match(SmallGrammarParser.LPAR)
+            self.state = 129
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & 503316480) != 0):
+                self.state = 128
+                self.exprList()
+
+
+            self.state = 131
+            self.match(SmallGrammarParser.RPAR)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
     class ExprContext(ParserRuleContext):
         __slots__ = 'parser'
 
@@ -867,20 +991,20 @@ class SmallGrammarParser ( Parser ):
     def expr(self):
 
         localctx = SmallGrammarParser.ExprContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 22, self.RULE_expr)
+        self.enterRule(localctx, 26, self.RULE_expr)
         try:
-            self.state = 120
+            self.state = 135
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,7,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,9,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 118
+                self.state = 133
                 self.arithExpr()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 119
+                self.state = 134
                 self.boolExpr()
                 pass
 
@@ -924,20 +1048,20 @@ class SmallGrammarParser ( Parser ):
     def arithExpr(self):
 
         localctx = SmallGrammarParser.ArithExprContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 24, self.RULE_arithExpr)
+        self.enterRule(localctx, 28, self.RULE_arithExpr)
         try:
-            self.state = 124
+            self.state = 139
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,8,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,10,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 122
+                self.state = 137
                 self.noprnd()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 123
+                self.state = 138
                 self.binMathOp()
                 pass
 
@@ -985,26 +1109,26 @@ class SmallGrammarParser ( Parser ):
     def boolExpr(self):
 
         localctx = SmallGrammarParser.BoolExprContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 26, self.RULE_boolExpr)
+        self.enterRule(localctx, 30, self.RULE_boolExpr)
         try:
-            self.state = 129
+            self.state = 144
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,9,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,11,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 126
+                self.state = 141
                 self.boprnd()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 127
+                self.state = 142
                 self.relOp()
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 128
+                self.state = 143
                 self.binLogicOp()
                 pass
 
@@ -1053,14 +1177,14 @@ class SmallGrammarParser ( Parser ):
     def binMathOp(self):
 
         localctx = SmallGrammarParser.BinMathOpContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 28, self.RULE_binMathOp)
+        self.enterRule(localctx, 32, self.RULE_binMathOp)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 131
+            self.state = 146
             localctx.left = self.noprnd()
-            self.state = 132
+            self.state = 147
             self.mathOp()
-            self.state = 133
+            self.state = 148
             localctx.right = self.noprnd()
         except RecognitionException as re:
             localctx.exception = re
@@ -1106,14 +1230,14 @@ class SmallGrammarParser ( Parser ):
     def binLogicOp(self):
 
         localctx = SmallGrammarParser.BinLogicOpContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 30, self.RULE_binLogicOp)
+        self.enterRule(localctx, 34, self.RULE_binLogicOp)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 135
+            self.state = 150
             localctx.left = self.noprnd()
-            self.state = 136
+            self.state = 151
             self.logicOp()
-            self.state = 137
+            self.state = 152
             localctx.right = self.noprnd()
         except RecognitionException as re:
             localctx.exception = re
@@ -1159,14 +1283,14 @@ class SmallGrammarParser ( Parser ):
     def relOp(self):
 
         localctx = SmallGrammarParser.RelOpContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 32, self.RULE_relOp)
+        self.enterRule(localctx, 36, self.RULE_relOp)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 139
+            self.state = 154
             localctx.left = self.boprnd()
-            self.state = 140
+            self.state = 155
             self.nop()
-            self.state = 141
+            self.state = 156
             localctx.right = self.boprnd()
         except RecognitionException as re:
             localctx.exception = re
@@ -1205,11 +1329,11 @@ class SmallGrammarParser ( Parser ):
     def noprnd(self):
 
         localctx = SmallGrammarParser.NoprndContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 34, self.RULE_noprnd)
+        self.enterRule(localctx, 38, self.RULE_noprnd)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 143
+            self.state = 158
             _la = self._input.LA(1)
             if not(_la==27 or _la==28):
                 self._errHandler.recoverInline(self)
@@ -1256,141 +1380,17 @@ class SmallGrammarParser ( Parser ):
     def boprnd(self):
 
         localctx = SmallGrammarParser.BoprndContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 36, self.RULE_boprnd)
+        self.enterRule(localctx, 40, self.RULE_boprnd)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 145
+            self.state = 160
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 369098752) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
                 self.consume()
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class ExprListContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def expr(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(SmallGrammarParser.ExprContext)
-            else:
-                return self.getTypedRuleContext(SmallGrammarParser.ExprContext,i)
-
-
-        def COMMA(self, i:int=None):
-            if i is None:
-                return self.getTokens(SmallGrammarParser.COMMA)
-            else:
-                return self.getToken(SmallGrammarParser.COMMA, i)
-
-        def getRuleIndex(self):
-            return SmallGrammarParser.RULE_exprList
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprList" ):
-                return visitor.visitExprList(self)
-            else:
-                return visitor.visitChildren(self)
-
-
-
-
-    def exprList(self):
-
-        localctx = SmallGrammarParser.ExprListContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 38, self.RULE_exprList)
-        self._la = 0 # Token type
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 147
-            self.expr()
-            self.state = 152
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            while _la==10:
-                self.state = 148
-                self.match(SmallGrammarParser.COMMA)
-                self.state = 149
-                self.expr()
-                self.state = 154
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class FuncCallContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def IDENTIFIER(self):
-            return self.getToken(SmallGrammarParser.IDENTIFIER, 0)
-
-        def LPAR(self):
-            return self.getToken(SmallGrammarParser.LPAR, 0)
-
-        def RPAR(self):
-            return self.getToken(SmallGrammarParser.RPAR, 0)
-
-        def exprList(self):
-            return self.getTypedRuleContext(SmallGrammarParser.ExprListContext,0)
-
-
-        def getRuleIndex(self):
-            return SmallGrammarParser.RULE_funcCall
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitFuncCall" ):
-                return visitor.visitFuncCall(self)
-            else:
-                return visitor.visitChildren(self)
-
-
-
-
-    def funcCall(self):
-
-        localctx = SmallGrammarParser.FuncCallContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 40, self.RULE_funcCall)
-        self._la = 0 # Token type
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 155
-            self.match(SmallGrammarParser.IDENTIFIER)
-            self.state = 156
-            self.match(SmallGrammarParser.LPAR)
-            self.state = 158
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & 503316480) != 0):
-                self.state = 157
-                self.exprList()
-
-
-            self.state = 160
-            self.match(SmallGrammarParser.RPAR)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
