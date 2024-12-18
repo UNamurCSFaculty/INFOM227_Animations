@@ -3,6 +3,8 @@ from __future__ import annotations
 from enum import StrEnum
 
 from manim_dataflow_analysis import *
+from small import read_string
+from functools import cached_property
 from small.ast import *
 
 
@@ -446,6 +448,12 @@ class AbstractZeroAnalysisScene(
     AbstractAnalysisScene[ZeroAnalysisValue, BoolExpression]
 ):
     title = "Zero Analysis"
+
+    program_string: str
+
+    @cached_property
+    def program(self) -> AstFunction:
+        return read_string(self.program_string)[0]
 
     lattice = FiniteSizeLattice(
         (ZeroAnalysisValue.BOTTOM, ZeroAnalysisValue.Z),
