@@ -24,11 +24,6 @@ class SmallGrammarVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by SmallGrammarParser#param.
-    def visitParam(self, ctx:SmallGrammarParser.ParamContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by SmallGrammarParser#sequence.
     def visitSequence(self, ctx:SmallGrammarParser.SequenceContext):
         return self.visitChildren(ctx)
