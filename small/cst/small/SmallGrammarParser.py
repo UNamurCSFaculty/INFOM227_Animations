@@ -41,7 +41,7 @@ def serializedATN():
         79,78,1,0,0,0,80,83,1,0,0,0,81,79,1,0,0,0,81,82,1,0,0,0,82,9,1,0,
         0,0,83,81,1,0,0,0,84,89,3,12,6,0,85,89,3,14,7,0,86,89,3,16,8,0,87,
         89,3,18,9,0,88,84,1,0,0,0,88,85,1,0,0,0,88,86,1,0,0,0,88,87,1,0,
-        0,0,89,11,1,0,0,0,90,91,5,28,0,0,91,94,5,23,0,0,92,95,3,24,12,0,
+        0,0,89,11,1,0,0,0,90,91,5,28,0,0,91,94,5,12,0,0,92,95,3,24,12,0,
         93,95,3,20,10,0,94,92,1,0,0,0,94,93,1,0,0,0,95,96,1,0,0,0,96,97,
         5,11,0,0,97,13,1,0,0,0,98,99,5,1,0,0,99,100,5,8,0,0,100,101,3,28,
         14,0,101,102,5,9,0,0,102,103,3,6,3,0,103,104,5,2,0,0,104,105,3,6,
@@ -560,8 +560,8 @@ class SmallGrammarParser ( Parser ):
         def IDENTIFIER(self):
             return self.getToken(SmallGrammarParser.IDENTIFIER, 0)
 
-        def EQUAL(self):
-            return self.getToken(SmallGrammarParser.EQUAL, 0)
+        def ASSIGN(self):
+            return self.getToken(SmallGrammarParser.ASSIGN, 0)
 
         def SEMICOLON(self):
             return self.getToken(SmallGrammarParser.SEMICOLON, 0)
@@ -595,7 +595,7 @@ class SmallGrammarParser ( Parser ):
             self.state = 90
             self.match(SmallGrammarParser.IDENTIFIER)
             self.state = 91
-            self.match(SmallGrammarParser.EQUAL)
+            self.match(SmallGrammarParser.ASSIGN)
             self.state = 94
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,6,self._ctx)
