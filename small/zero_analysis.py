@@ -1,16 +1,9 @@
 from __future__ import annotations
 
 from enum import StrEnum
-from typing import TYPE_CHECKING
 
-from manim import *
 from manim_dataflow_analysis import *
-
-from ..programs import *
 from small.ast import *
-
-if TYPE_CHECKING:
-    from manim_dataflow_analysis.abstract_environment import AbstractEnvironment
 
 
 class ZeroAnalysisValue(StrEnum):
@@ -449,11 +442,9 @@ class ZeroAnalysisConditionUpdateFunction(
                 return {}, 19
 
 
-class ZeroAnalysisScene(AbstractAnalysisScene[ZeroAnalysisValue, BoolExpression]):
-    title = "Zero Analysis example"
-
-    program = simple_if
-
+class AbstractZeroAnalysisScene(
+    AbstractAnalysisScene[ZeroAnalysisValue, BoolExpression]
+):
     lattice = FiniteSizeLattice(
         (ZeroAnalysisValue.BOTTOM, ZeroAnalysisValue.Z),
         (ZeroAnalysisValue.BOTTOM, ZeroAnalysisValue.NZ),
