@@ -7,8 +7,7 @@ from typing import Any, Iterable
 from manim import *
 from manim_dataflow_analysis import *
 
-from programs import *
-from small import *
+from small.ast import *
 
 
 @total_ordering
@@ -227,10 +226,8 @@ class IntervalAnalysisLattice(Lattice[IntervalAnalysisValue]):
 class IntervalAnalysisScene(
     AbstractAnalysisScene[IntervalAnalysisValue, BoolExpression]
 ):
-    title = "Interval Analysis example"
+    title = "Interval Analysis"
 
     sorting_function = sorted
-
-    program = simple_if
 
     lattice = IntervalAnalysisLattice(15)
