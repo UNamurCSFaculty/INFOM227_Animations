@@ -18,16 +18,16 @@ def serializedATN():
         10,2,12,2,70,9,2,1,3,1,3,1,4,1,4,1,4,1,4,1,4,3,4,79,8,4,1,5,5,5,
         82,8,5,10,5,12,5,85,9,5,1,6,1,6,1,6,1,6,3,6,91,8,6,1,7,1,7,1,7,1,
         7,3,7,97,8,7,1,7,1,7,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,9,1,9,1,9,
-        1,9,1,9,1,9,1,10,1,10,1,10,1,10,1,11,1,11,1,11,5,11,122,8,11,10,
-        11,12,11,125,9,11,1,12,1,12,1,12,3,12,130,8,12,1,12,1,12,1,13,1,
-        13,3,13,136,8,13,1,14,1,14,3,14,140,8,14,1,15,1,15,1,15,3,15,145,
-        8,15,1,16,1,16,1,16,1,16,1,17,1,17,1,17,1,17,1,18,1,18,1,18,1,18,
-        1,19,1,19,1,20,1,20,1,21,1,21,1,22,1,22,1,23,1,23,1,23,0,0,24,0,
-        2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,
-        0,5,1,0,27,28,2,0,25,26,28,28,1,0,15,18,1,0,19,24,2,0,13,14,23,24,
+        1,9,1,9,1,9,1,10,1,10,1,10,1,10,1,11,1,11,1,11,3,11,122,8,11,1,11,
+        1,11,1,12,1,12,1,12,5,12,129,8,12,10,12,12,12,132,9,12,1,13,1,13,
+        3,13,136,8,13,1,14,1,14,3,14,140,8,14,1,15,1,15,1,15,3,15,145,8,
+        15,1,16,1,16,1,16,1,16,1,17,1,17,1,17,1,17,1,18,1,18,1,18,1,18,1,
+        19,1,19,1,20,1,20,1,21,1,21,1,22,1,22,1,23,1,23,1,23,0,0,24,0,2,
+        4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,0,
+        5,1,0,27,28,2,0,25,26,28,28,1,0,15,18,1,0,19,24,2,0,13,14,23,24,
         159,0,51,1,0,0,0,2,54,1,0,0,0,4,63,1,0,0,0,6,71,1,0,0,0,8,78,1,0,
         0,0,10,83,1,0,0,0,12,90,1,0,0,0,14,92,1,0,0,0,16,100,1,0,0,0,18,
-        108,1,0,0,0,20,114,1,0,0,0,22,118,1,0,0,0,24,126,1,0,0,0,26,135,
+        108,1,0,0,0,20,114,1,0,0,0,22,118,1,0,0,0,24,125,1,0,0,0,26,135,
         1,0,0,0,28,139,1,0,0,0,30,144,1,0,0,0,32,146,1,0,0,0,34,150,1,0,
         0,0,36,154,1,0,0,0,38,158,1,0,0,0,40,160,1,0,0,0,42,162,1,0,0,0,
         44,164,1,0,0,0,46,166,1,0,0,0,48,50,3,2,1,0,49,48,1,0,0,0,50,53,
@@ -42,17 +42,17 @@ def serializedATN():
         1,0,0,0,83,84,1,0,0,0,84,11,1,0,0,0,85,83,1,0,0,0,86,91,3,14,7,0,
         87,91,3,16,8,0,88,91,3,18,9,0,89,91,3,20,10,0,90,86,1,0,0,0,90,87,
         1,0,0,0,90,88,1,0,0,0,90,89,1,0,0,0,91,13,1,0,0,0,92,93,5,28,0,0,
-        93,96,5,23,0,0,94,97,3,26,13,0,95,97,3,24,12,0,96,94,1,0,0,0,96,
+        93,96,5,23,0,0,94,97,3,26,13,0,95,97,3,22,11,0,96,94,1,0,0,0,96,
         95,1,0,0,0,97,98,1,0,0,0,98,99,5,11,0,0,99,15,1,0,0,0,100,101,5,
         1,0,0,101,102,5,8,0,0,102,103,3,30,15,0,103,104,5,9,0,0,104,105,
         3,8,4,0,105,106,5,2,0,0,106,107,3,8,4,0,107,17,1,0,0,0,108,109,5,
         3,0,0,109,110,5,8,0,0,110,111,3,30,15,0,111,112,5,9,0,0,112,113,
         3,8,4,0,113,19,1,0,0,0,114,115,5,5,0,0,115,116,3,26,13,0,116,117,
-        5,11,0,0,117,21,1,0,0,0,118,123,3,26,13,0,119,120,5,10,0,0,120,122,
-        3,26,13,0,121,119,1,0,0,0,122,125,1,0,0,0,123,121,1,0,0,0,123,124,
-        1,0,0,0,124,23,1,0,0,0,125,123,1,0,0,0,126,127,5,28,0,0,127,129,
-        5,8,0,0,128,130,3,22,11,0,129,128,1,0,0,0,129,130,1,0,0,0,130,131,
-        1,0,0,0,131,132,5,9,0,0,132,25,1,0,0,0,133,136,3,28,14,0,134,136,
+        5,11,0,0,117,21,1,0,0,0,118,119,5,28,0,0,119,121,5,8,0,0,120,122,
+        3,24,12,0,121,120,1,0,0,0,121,122,1,0,0,0,122,123,1,0,0,0,123,124,
+        5,9,0,0,124,23,1,0,0,0,125,130,3,26,13,0,126,127,5,10,0,0,127,129,
+        3,26,13,0,128,126,1,0,0,0,129,132,1,0,0,0,130,128,1,0,0,0,130,131,
+        1,0,0,0,131,25,1,0,0,0,132,130,1,0,0,0,133,136,3,28,14,0,134,136,
         3,30,15,0,135,133,1,0,0,0,135,134,1,0,0,0,136,27,1,0,0,0,137,140,
         3,38,19,0,138,140,3,32,16,0,139,137,1,0,0,0,139,138,1,0,0,0,140,
         29,1,0,0,0,141,145,3,40,20,0,142,145,3,36,18,0,143,145,3,34,17,0,
@@ -62,7 +62,7 @@ def serializedATN():
         0,0,154,155,3,40,20,0,155,156,3,46,23,0,156,157,3,40,20,0,157,37,
         1,0,0,0,158,159,7,0,0,0,159,39,1,0,0,0,160,161,7,1,0,0,161,41,1,
         0,0,0,162,163,7,2,0,0,163,43,1,0,0,0,164,165,7,3,0,0,165,45,1,0,
-        0,0,166,167,7,4,0,0,167,47,1,0,0,0,12,51,58,68,78,83,90,96,123,129,
+        0,0,166,167,7,4,0,0,167,47,1,0,0,0,12,51,58,68,78,83,90,96,121,130,
         135,139,144
     ]
 
@@ -100,8 +100,8 @@ class SmallGrammarParser ( Parser ):
     RULE_ifStmt = 8
     RULE_whileStmt = 9
     RULE_returnStmt = 10
-    RULE_exprList = 11
-    RULE_funcCall = 12
+    RULE_funcCall = 11
+    RULE_exprList = 12
     RULE_expr = 13
     RULE_arithExpr = 14
     RULE_boolExpr = 15
@@ -116,7 +116,7 @@ class SmallGrammarParser ( Parser ):
 
     ruleNames =  [ "program", "function", "paramList", "param", "sequence", 
                    "stmtList", "stmt", "assignStmt", "ifStmt", "whileStmt", 
-                   "returnStmt", "exprList", "funcCall", "expr", "arithExpr", 
+                   "returnStmt", "funcCall", "exprList", "expr", "arithExpr", 
                    "boolExpr", "binMathOp", "binLogicOp", "relOp", "noprnd", 
                    "boprnd", "mathOp", "logicOp", "nop" ]
 
@@ -837,68 +837,6 @@ class SmallGrammarParser ( Parser ):
         return localctx
 
 
-    class ExprListContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def expr(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(SmallGrammarParser.ExprContext)
-            else:
-                return self.getTypedRuleContext(SmallGrammarParser.ExprContext,i)
-
-
-        def COMMA(self, i:int=None):
-            if i is None:
-                return self.getTokens(SmallGrammarParser.COMMA)
-            else:
-                return self.getToken(SmallGrammarParser.COMMA, i)
-
-        def getRuleIndex(self):
-            return SmallGrammarParser.RULE_exprList
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprList" ):
-                return visitor.visitExprList(self)
-            else:
-                return visitor.visitChildren(self)
-
-
-
-
-    def exprList(self):
-
-        localctx = SmallGrammarParser.ExprListContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 22, self.RULE_exprList)
-        self._la = 0 # Token type
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 118
-            self.expr()
-            self.state = 123
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            while _la==10:
-                self.state = 119
-                self.match(SmallGrammarParser.COMMA)
-                self.state = 120
-                self.expr()
-                self.state = 125
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
     class FuncCallContext(ParserRuleContext):
         __slots__ = 'parser'
 
@@ -934,24 +872,86 @@ class SmallGrammarParser ( Parser ):
     def funcCall(self):
 
         localctx = SmallGrammarParser.FuncCallContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 24, self.RULE_funcCall)
+        self.enterRule(localctx, 22, self.RULE_funcCall)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 126
+            self.state = 118
             self.match(SmallGrammarParser.IDENTIFIER)
-            self.state = 127
+            self.state = 119
             self.match(SmallGrammarParser.LPAR)
-            self.state = 129
+            self.state = 121
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & 503316480) != 0):
-                self.state = 128
+                self.state = 120
                 self.exprList()
 
 
-            self.state = 131
+            self.state = 123
             self.match(SmallGrammarParser.RPAR)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ExprListContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def expr(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(SmallGrammarParser.ExprContext)
+            else:
+                return self.getTypedRuleContext(SmallGrammarParser.ExprContext,i)
+
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(SmallGrammarParser.COMMA)
+            else:
+                return self.getToken(SmallGrammarParser.COMMA, i)
+
+        def getRuleIndex(self):
+            return SmallGrammarParser.RULE_exprList
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprList" ):
+                return visitor.visitExprList(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def exprList(self):
+
+        localctx = SmallGrammarParser.ExprListContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 24, self.RULE_exprList)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 125
+            self.expr()
+            self.state = 130
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while _la==10:
+                self.state = 126
+                self.match(SmallGrammarParser.COMMA)
+                self.state = 127
+                self.expr()
+                self.state = 132
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
