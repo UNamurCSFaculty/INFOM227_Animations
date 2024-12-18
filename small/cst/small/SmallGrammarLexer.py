@@ -1,4 +1,4 @@
-# Generated from small/small_grammar.g4 by ANTLR 4.13.2
+# Generated from small/SmallGrammar.g4 by ANTLR 4.13.2
 from antlr4 import *
 from io import StringIO
 import sys
@@ -86,7 +86,7 @@ def serializedATN():
         1,0,0,0,11,0,158,165,167,176,187,191,194,196,201,210,1,6,0,0
     ]
 
-class small_grammarLexer(Lexer):
+class SmallGrammarLexer(Lexer):
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
@@ -148,7 +148,7 @@ class small_grammarLexer(Lexer):
                   "DIFFERENT", "TRUE", "FALSE", "DIGIT", "NUM", "LETTER", 
                   "IDENTIFIER", "COMMENT", "NEWLINE", "WS" ]
 
-    grammarFileName = "small_grammar.g4"
+    grammarFileName = "SmallGrammar.g4"
 
     def __init__(self, input=None, output:TextIO = sys.stdout):
         super().__init__(input, output)
