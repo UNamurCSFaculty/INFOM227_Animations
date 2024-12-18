@@ -64,13 +64,13 @@ class SmallGrammarVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by SmallGrammarParser#exprList.
-    def visitExprList(self, ctx:SmallGrammarParser.ExprListContext):
+    # Visit a parse tree produced by SmallGrammarParser#funcCall.
+    def visitFuncCall(self, ctx:SmallGrammarParser.FuncCallContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by SmallGrammarParser#funcCall.
-    def visitFuncCall(self, ctx:SmallGrammarParser.FuncCallContext):
+    # Visit a parse tree produced by SmallGrammarParser#exprList.
+    def visitExprList(self, ctx:SmallGrammarParser.ExprListContext):
         return self.visitChildren(ctx)
 
 
