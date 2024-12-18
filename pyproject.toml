@@ -34,6 +34,7 @@ ruff = "ruff check ."
 ruff-fix = "ruff check --fix ."
 ruff-ufix = "ruff check --fix --unsafe-fixes ."
 lint = ["black", "ruff", "mypy"]
+build-small-visitor = "antlr4 -Dlanguage=Python3 -visitor -no-listener -o small/cst small/small_grammar.g4"
 
 [tool.coverage.run]
 relative_files = true
