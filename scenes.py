@@ -1,12 +1,10 @@
 from small.zero_analysis import AbstractZeroAnalysisScene
-from small import read_string
 
 
 class IfInWhileZeroAnalysisScene(AbstractZeroAnalysisScene):
     title = "Zero Analysis of an If Inside a While Loop"
 
-    program = read_string(
-        """
+    program_string = """
         function main() {
             y = 5 * 2;
             while (x > 0) {
@@ -19,14 +17,12 @@ class IfInWhileZeroAnalysisScene(AbstractZeroAnalysisScene):
             return y;
         }
         """
-    )[0]
 
 
 class SimpleIfZeroAnalysisScene(AbstractZeroAnalysisScene):
     title = "Zero Analysis of a Simple If Statement"
 
-    program = read_string(
-        """
+    program_string = """
         function main(a) {
             b = 0 - 5;
             if (b > 0) {
@@ -37,14 +33,12 @@ class SimpleIfZeroAnalysisScene(AbstractZeroAnalysisScene):
             return c;
         }
         """
-    )[0]
 
 
 class SumZeroAnalysisScene(AbstractZeroAnalysisScene):
     title = "Zero Analysis of the Sum Function"
 
-    program = read_string(
-        """
+    program_string = """
         function sum(n) {
             i = 0;
             sum = 0;
@@ -55,14 +49,12 @@ class SumZeroAnalysisScene(AbstractZeroAnalysisScene):
             return sum;
         }
         """
-    )[0]
 
 
 class NestedIfZeroAnalysisScene(AbstractZeroAnalysisScene):
     title = "Zero Analysis of a Nested If Statement"
 
-    program = read_string(
-        """
+    program_string = """
         function main() {
             y = 5;
             if (b) {
@@ -75,4 +67,3 @@ class NestedIfZeroAnalysisScene(AbstractZeroAnalysisScene):
             return y;
         }
         """
-    )[0]
