@@ -191,7 +191,7 @@ class SmallAstBuilder(SmallGrammarVisitor):
             except ValueError as e:
                 raise UnsupportedRuleException.from_ctx(str(e), ctx)
 
-        return ast.Assignment(ctx.start.line, variable, assignment_expr)
+        return ast.Assignment(ctx.start.line, ast.Variable(variable), assignment_expr)
 
     def visitIfStmt(self, ctx: SmallGrammarParser.IfStmtContext) -> ast.IfElse:
         condition = self.visitBoolExpr(
