@@ -105,7 +105,7 @@ stmtList: stmt*;
 
 stmt: assignStmt | ifStmt | whileStmt | returnStmt;
 
-assignStmt: IDENTIFIER EQUAL (expr | funcCall) SEMICOLON;
+assignStmt: IDENTIFIER ASSIGN (expr | funcCall) SEMICOLON;
 
 ifStmt:
 	IF LPAR boolExpr RPAR ifBody = sequence ELSE elseBody = sequence;
