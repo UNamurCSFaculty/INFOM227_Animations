@@ -117,9 +117,9 @@ returnStmt: RETURN expr SEMICOLON;
 
 // Expressions
 
-exprList: expr (COMMA expr)*;
-
 funcCall: IDENTIFIER LPAR exprList? RPAR;
+
+exprList: expr (COMMA expr)*;
 
 expr: arithExpr | boolExpr;
 
