@@ -349,7 +349,7 @@ class While(AstStatement):
                 condition=condition,
             )
 
-        return [(self, BoolConstant(True), False)], graph
+        return [(self, self.condition.neg(), False)], graph
 
     def __str__(self) -> str:
         return "%s {\n\t%s\n}" % (
