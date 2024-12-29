@@ -326,7 +326,7 @@ class ZeroAnalysisConditionUpdateFunction(
         self,
         condition: BoolExpression,
         abstract_environment: AbstractEnvironment[ZeroAnalysisValue],
-    ) -> tuple[dict[str, ZeroAnalysisValue], int]:
+    ) -> tuple[dict[str, ZeroAnalysisValue] | None, int]:
         match condition:
             case IntComparisonExpression(
                 Variable(y), IntComparisonOperator.LT, IntConstant(c)
