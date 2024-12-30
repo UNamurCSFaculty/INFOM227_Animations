@@ -164,7 +164,7 @@ class ComplexZeroAnalysisScene(AbstractZeroAnalysisScene):
 
 
 class FactorialIntervalAnalysisScene(AbstractIntervalAnalysisScene):
-    title = "Interval Analysis for the factorial function"
+    title = "Interval Analysis of the Factorial Function"
 
     program_string = """
         function fac(n) {
