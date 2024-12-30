@@ -372,7 +372,12 @@ class SmallAstBuilder(SmallGrammarVisitor):
                 except ValueError as e:
                     raise UnsupportedRuleException.from_ctx(str(e), ctx)
 
-            return ast.Variable(variable)
+            expression = ast.Variable(variable)
+
+            if term(ctx.NOT()) is not None:
+                return ast.BoolNotExpression(expression)
+            else:
+                return expression
         elif term(ctx.TRUE()) is not None:
             return ast.BoolConstant(True)
         elif term(ctx.FALSE()) is not None:

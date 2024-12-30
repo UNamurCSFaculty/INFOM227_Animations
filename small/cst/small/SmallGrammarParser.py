@@ -10,7 +10,7 @@ else:
 
 def serializedATN():
     return [
-        4,1,31,167,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,32,172,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
         2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,20,
         7,20,2,21,7,21,2,22,7,22,1,0,5,0,48,8,0,10,0,12,0,51,9,0,1,1,1,1,
@@ -22,33 +22,33 @@ def serializedATN():
         11,1,11,5,11,127,8,11,10,11,12,11,130,9,11,1,12,1,12,3,12,134,8,
         12,1,13,1,13,3,13,138,8,13,1,14,1,14,1,14,3,14,143,8,14,1,15,1,15,
         1,15,1,15,1,16,1,16,1,16,1,16,1,17,1,17,1,17,1,17,1,18,1,18,1,19,
-        1,19,1,20,1,20,1,21,1,21,1,22,1,22,1,22,0,0,23,0,2,4,6,8,10,12,14,
-        16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,0,5,1,0,27,28,2,0,25,
-        26,28,28,1,0,15,18,1,0,19,24,2,0,13,14,23,24,158,0,49,1,0,0,0,2,
-        52,1,0,0,0,4,63,1,0,0,0,6,76,1,0,0,0,8,81,1,0,0,0,10,88,1,0,0,0,
-        12,90,1,0,0,0,14,98,1,0,0,0,16,106,1,0,0,0,18,112,1,0,0,0,20,116,
-        1,0,0,0,22,123,1,0,0,0,24,133,1,0,0,0,26,137,1,0,0,0,28,142,1,0,
-        0,0,30,144,1,0,0,0,32,148,1,0,0,0,34,152,1,0,0,0,36,156,1,0,0,0,
-        38,158,1,0,0,0,40,160,1,0,0,0,42,162,1,0,0,0,44,164,1,0,0,0,46,48,
-        3,2,1,0,47,46,1,0,0,0,48,51,1,0,0,0,49,47,1,0,0,0,49,50,1,0,0,0,
-        50,1,1,0,0,0,51,49,1,0,0,0,52,53,5,4,0,0,53,54,5,28,0,0,54,56,5,
-        8,0,0,55,57,3,4,2,0,56,55,1,0,0,0,56,57,1,0,0,0,57,58,1,0,0,0,58,
-        59,5,9,0,0,59,60,5,6,0,0,60,61,3,8,4,0,61,62,5,7,0,0,62,3,1,0,0,
-        0,63,68,5,28,0,0,64,65,5,10,0,0,65,67,5,28,0,0,66,64,1,0,0,0,67,
-        70,1,0,0,0,68,66,1,0,0,0,68,69,1,0,0,0,69,5,1,0,0,0,70,68,1,0,0,
-        0,71,77,3,10,5,0,72,73,5,6,0,0,73,74,3,8,4,0,74,75,5,7,0,0,75,77,
-        1,0,0,0,76,71,1,0,0,0,76,72,1,0,0,0,77,7,1,0,0,0,78,80,3,10,5,0,
-        79,78,1,0,0,0,80,83,1,0,0,0,81,79,1,0,0,0,81,82,1,0,0,0,82,9,1,0,
-        0,0,83,81,1,0,0,0,84,89,3,12,6,0,85,89,3,14,7,0,86,89,3,16,8,0,87,
-        89,3,18,9,0,88,84,1,0,0,0,88,85,1,0,0,0,88,86,1,0,0,0,88,87,1,0,
-        0,0,89,11,1,0,0,0,90,91,5,28,0,0,91,94,5,12,0,0,92,95,3,24,12,0,
-        93,95,3,20,10,0,94,92,1,0,0,0,94,93,1,0,0,0,95,96,1,0,0,0,96,97,
-        5,11,0,0,97,13,1,0,0,0,98,99,5,1,0,0,99,100,5,8,0,0,100,101,3,28,
-        14,0,101,102,5,9,0,0,102,103,3,6,3,0,103,104,5,2,0,0,104,105,3,6,
-        3,0,105,15,1,0,0,0,106,107,5,3,0,0,107,108,5,8,0,0,108,109,3,28,
-        14,0,109,110,5,9,0,0,110,111,3,6,3,0,111,17,1,0,0,0,112,113,5,5,
-        0,0,113,114,3,24,12,0,114,115,5,11,0,0,115,19,1,0,0,0,116,117,5,
-        28,0,0,117,119,5,8,0,0,118,120,3,22,11,0,119,118,1,0,0,0,119,120,
+        1,19,1,19,1,19,1,19,3,19,164,8,19,1,20,1,20,1,21,1,21,1,22,1,22,
+        1,22,0,0,23,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,
+        38,40,42,44,0,4,1,0,28,29,1,0,16,19,1,0,20,25,2,0,14,15,24,25,166,
+        0,49,1,0,0,0,2,52,1,0,0,0,4,63,1,0,0,0,6,76,1,0,0,0,8,81,1,0,0,0,
+        10,88,1,0,0,0,12,90,1,0,0,0,14,98,1,0,0,0,16,106,1,0,0,0,18,112,
+        1,0,0,0,20,116,1,0,0,0,22,123,1,0,0,0,24,133,1,0,0,0,26,137,1,0,
+        0,0,28,142,1,0,0,0,30,144,1,0,0,0,32,148,1,0,0,0,34,152,1,0,0,0,
+        36,156,1,0,0,0,38,163,1,0,0,0,40,165,1,0,0,0,42,167,1,0,0,0,44,169,
+        1,0,0,0,46,48,3,2,1,0,47,46,1,0,0,0,48,51,1,0,0,0,49,47,1,0,0,0,
+        49,50,1,0,0,0,50,1,1,0,0,0,51,49,1,0,0,0,52,53,5,4,0,0,53,54,5,29,
+        0,0,54,56,5,8,0,0,55,57,3,4,2,0,56,55,1,0,0,0,56,57,1,0,0,0,57,58,
+        1,0,0,0,58,59,5,9,0,0,59,60,5,6,0,0,60,61,3,8,4,0,61,62,5,7,0,0,
+        62,3,1,0,0,0,63,68,5,29,0,0,64,65,5,10,0,0,65,67,5,29,0,0,66,64,
+        1,0,0,0,67,70,1,0,0,0,68,66,1,0,0,0,68,69,1,0,0,0,69,5,1,0,0,0,70,
+        68,1,0,0,0,71,77,3,10,5,0,72,73,5,6,0,0,73,74,3,8,4,0,74,75,5,7,
+        0,0,75,77,1,0,0,0,76,71,1,0,0,0,76,72,1,0,0,0,77,7,1,0,0,0,78,80,
+        3,10,5,0,79,78,1,0,0,0,80,83,1,0,0,0,81,79,1,0,0,0,81,82,1,0,0,0,
+        82,9,1,0,0,0,83,81,1,0,0,0,84,89,3,12,6,0,85,89,3,14,7,0,86,89,3,
+        16,8,0,87,89,3,18,9,0,88,84,1,0,0,0,88,85,1,0,0,0,88,86,1,0,0,0,
+        88,87,1,0,0,0,89,11,1,0,0,0,90,91,5,29,0,0,91,94,5,12,0,0,92,95,
+        3,24,12,0,93,95,3,20,10,0,94,92,1,0,0,0,94,93,1,0,0,0,95,96,1,0,
+        0,0,96,97,5,11,0,0,97,13,1,0,0,0,98,99,5,1,0,0,99,100,5,8,0,0,100,
+        101,3,28,14,0,101,102,5,9,0,0,102,103,3,6,3,0,103,104,5,2,0,0,104,
+        105,3,6,3,0,105,15,1,0,0,0,106,107,5,3,0,0,107,108,5,8,0,0,108,109,
+        3,28,14,0,109,110,5,9,0,0,110,111,3,6,3,0,111,17,1,0,0,0,112,113,
+        5,5,0,0,113,114,3,24,12,0,114,115,5,11,0,0,115,19,1,0,0,0,116,117,
+        5,29,0,0,117,119,5,8,0,0,118,120,3,22,11,0,119,118,1,0,0,0,119,120,
         1,0,0,0,120,121,1,0,0,0,121,122,5,9,0,0,122,21,1,0,0,0,123,128,3,
         24,12,0,124,125,5,10,0,0,125,127,3,24,12,0,126,124,1,0,0,0,127,130,
         1,0,0,0,128,126,1,0,0,0,128,129,1,0,0,0,129,23,1,0,0,0,130,128,1,
@@ -60,9 +60,11 @@ def serializedATN():
         147,3,36,18,0,147,31,1,0,0,0,148,149,3,36,18,0,149,150,3,42,21,0,
         150,151,3,36,18,0,151,33,1,0,0,0,152,153,3,38,19,0,153,154,3,44,
         22,0,154,155,3,38,19,0,155,35,1,0,0,0,156,157,7,0,0,0,157,37,1,0,
-        0,0,158,159,7,1,0,0,159,39,1,0,0,0,160,161,7,2,0,0,161,41,1,0,0,
-        0,162,163,7,3,0,0,163,43,1,0,0,0,164,165,7,4,0,0,165,45,1,0,0,0,
-        12,49,56,68,76,81,88,94,119,128,133,137,142
+        0,0,158,164,5,29,0,0,159,164,5,26,0,0,160,164,5,27,0,0,161,162,5,
+        13,0,0,162,164,5,29,0,0,163,158,1,0,0,0,163,159,1,0,0,0,163,160,
+        1,0,0,0,163,161,1,0,0,0,164,39,1,0,0,0,165,166,7,1,0,0,166,41,1,
+        0,0,0,167,168,7,2,0,0,168,43,1,0,0,0,169,170,7,3,0,0,170,45,1,0,
+        0,0,13,49,56,68,76,81,88,94,119,128,133,137,142,163
     ]
 
 class SmallGrammarParser ( Parser ):
@@ -77,16 +79,17 @@ class SmallGrammarParser ( Parser ):
 
     literalNames = [ "<INVALID>", "'if'", "'else'", "'while'", "'function'", 
                      "'return'", "'{'", "'}'", "'('", "')'", "','", "';'", 
-                     "'='", "'and'", "'or'", "'+'", "'-'", "'*'", "'/'", 
-                     "'>'", "'>='", "'<'", "'<='", "'=='", "'!='", "'True'", 
-                     "'False'" ]
+                     "'='", "'not'", "'and'", "'or'", "'+'", "'-'", "'*'", 
+                     "'/'", "'>'", "'>='", "'<'", "'<='", "'=='", "'!='", 
+                     "'True'", "'False'" ]
 
     symbolicNames = [ "<INVALID>", "IF", "ELSE", "WHILE", "FUNCTION", "RETURN", 
                       "LBRACE", "RBRACE", "LPAR", "RPAR", "COMMA", "SEMICOLON", 
-                      "ASSIGN", "AND", "OR", "ADD", "SUBSTRACT", "MULTIPLY", 
-                      "DIVIDE", "GREATER", "GREATER_EQUAL", "LESS", "LESS_EQUAL", 
-                      "EQUAL", "DIFFERENT", "TRUE", "FALSE", "NUM", "IDENTIFIER", 
-                      "COMMENT", "NEWLINE", "WS" ]
+                      "ASSIGN", "NOT", "AND", "OR", "ADD", "SUBSTRACT", 
+                      "MULTIPLY", "DIVIDE", "GREATER", "GREATER_EQUAL", 
+                      "LESS", "LESS_EQUAL", "EQUAL", "DIFFERENT", "TRUE", 
+                      "FALSE", "NUM", "IDENTIFIER", "COMMENT", "NEWLINE", 
+                      "WS" ]
 
     RULE_program = 0
     RULE_function = 1
@@ -131,25 +134,26 @@ class SmallGrammarParser ( Parser ):
     COMMA=10
     SEMICOLON=11
     ASSIGN=12
-    AND=13
-    OR=14
-    ADD=15
-    SUBSTRACT=16
-    MULTIPLY=17
-    DIVIDE=18
-    GREATER=19
-    GREATER_EQUAL=20
-    LESS=21
-    LESS_EQUAL=22
-    EQUAL=23
-    DIFFERENT=24
-    TRUE=25
-    FALSE=26
-    NUM=27
-    IDENTIFIER=28
-    COMMENT=29
-    NEWLINE=30
-    WS=31
+    NOT=13
+    AND=14
+    OR=15
+    ADD=16
+    SUBSTRACT=17
+    MULTIPLY=18
+    DIVIDE=19
+    GREATER=20
+    GREATER_EQUAL=21
+    LESS=22
+    LESS_EQUAL=23
+    EQUAL=24
+    DIFFERENT=25
+    TRUE=26
+    FALSE=27
+    NUM=28
+    IDENTIFIER=29
+    COMMENT=30
+    NEWLINE=31
+    WS=32
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -273,7 +277,7 @@ class SmallGrammarParser ( Parser ):
             self.state = 56
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==28:
+            if _la==29:
                 self.state = 55
                 self.paramList()
 
@@ -397,7 +401,7 @@ class SmallGrammarParser ( Parser ):
             self.state = 76
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [1, 3, 5, 28]:
+            if token in [1, 3, 5, 29]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 71
                 self.stmt()
@@ -459,7 +463,7 @@ class SmallGrammarParser ( Parser ):
             self.state = 81
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 268435498) != 0):
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 536870954) != 0):
                 self.state = 78
                 self.stmt()
                 self.state = 83
@@ -518,7 +522,7 @@ class SmallGrammarParser ( Parser ):
             self.state = 88
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [28]:
+            if token in [29]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 84
                 self.assignStmt()
@@ -851,7 +855,7 @@ class SmallGrammarParser ( Parser ):
             self.state = 119
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & 503316480) != 0):
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & 1006641152) != 0):
                 self.state = 118
                 self.exprList()
 
@@ -1303,7 +1307,7 @@ class SmallGrammarParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 156
             _la = self._input.LA(1)
-            if not(_la==27 or _la==28):
+            if not(_la==28 or _la==29):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -1333,6 +1337,9 @@ class SmallGrammarParser ( Parser ):
         def FALSE(self):
             return self.getToken(SmallGrammarParser.FALSE, 0)
 
+        def NOT(self):
+            return self.getToken(SmallGrammarParser.NOT, 0)
+
         def getRuleIndex(self):
             return SmallGrammarParser.RULE_boprnd
 
@@ -1349,16 +1356,35 @@ class SmallGrammarParser ( Parser ):
 
         localctx = SmallGrammarParser.BoprndContext(self, self._ctx, self.state)
         self.enterRule(localctx, 38, self.RULE_boprnd)
-        self._la = 0 # Token type
         try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 158
-            _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 369098752) != 0)):
-                self._errHandler.recoverInline(self)
+            self.state = 163
+            self._errHandler.sync(self)
+            token = self._input.LA(1)
+            if token in [29]:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 158
+                self.match(SmallGrammarParser.IDENTIFIER)
+                pass
+            elif token in [26]:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 159
+                self.match(SmallGrammarParser.TRUE)
+                pass
+            elif token in [27]:
+                self.enterOuterAlt(localctx, 3)
+                self.state = 160
+                self.match(SmallGrammarParser.FALSE)
+                pass
+            elif token in [13]:
+                self.enterOuterAlt(localctx, 4)
+                self.state = 161
+                self.match(SmallGrammarParser.NOT)
+                self.state = 162
+                self.match(SmallGrammarParser.IDENTIFIER)
+                pass
             else:
-                self._errHandler.reportMatch(self)
-                self.consume()
+                raise NoViableAltException(self)
+
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1406,9 +1432,9 @@ class SmallGrammarParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 160
+            self.state = 165
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 491520) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 983040) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -1466,9 +1492,9 @@ class SmallGrammarParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 162
+            self.state = 167
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 33030144) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 66060288) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -1520,9 +1546,9 @@ class SmallGrammarParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 164
+            self.state = 169
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 25190400) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 50380800) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)

@@ -195,7 +195,7 @@ class BoolNotExpression:
         return self.value
 
     def __str__(self) -> str:
-        return f"!{self.value}"
+        return f"not {self.value}"
 
 
 @dataclass(frozen=True)
