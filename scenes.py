@@ -36,6 +36,21 @@ class SimpleIfZeroAnalysisScene(AbstractZeroAnalysisScene):
         """
 
 
+class UnreachableCodeZeroAnalysisScene(AbstractZeroAnalysisScene):
+    title = "Zero Analysis with unreachable code"
+
+    program_string = """
+        function main(b) {
+            if (False) {
+                c = 5;
+            } else {
+                c = 0;
+            }
+            return b + c;
+        }
+        """
+
+
 class SumZeroAnalysisScene(AbstractZeroAnalysisScene):
     title = "Zero Analysis of the Sum Function"
 
