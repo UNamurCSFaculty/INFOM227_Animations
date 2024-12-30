@@ -623,7 +623,7 @@ class IntervalAnalysisConditionUpdateFunction(
         ),
         (
             r"cg[[ y >= x ]] (\phi)",
-            r"\phi[y \mapsto [-\infty, \phi(y).low]]",
+            r"\phi[x \mapsto [-\infty, \phi(y).low]]",
             r"\phi(x) \in \{\bot, \top\}",
         ),
         (
