@@ -148,17 +148,17 @@ class ComplexZeroAnalysisScene(AbstractZeroAnalysisScene):
         """
 
 
-class SimpleIntervalAnalysisScene(AbstractIntervalAnalysisScene):
-    title = "Simple Interval Analysis"
+class FactorialIntervalAnalysisScene(AbstractIntervalAnalysisScene):
+    title = "Interval Analysis for the factorial function"
 
     program_string = """
-        function main(a) {
-            y = 1;
-            if (False) {
-                y = 2;
-            } else {
-                y = 4;
+        function fac(n) {
+            i = 0;
+            f = 1;
+            while (i < n) {
+                i = i + 1;
+                f = f * i;
             }
-            return y;
+            return f;
         }
         """
