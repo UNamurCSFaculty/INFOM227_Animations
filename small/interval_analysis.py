@@ -727,7 +727,7 @@ class AbstractIntervalAnalysisScene(
     def program(self) -> AstFunction:  # type: ignore
         return read_string(self.program_string)[0]
 
-    lattice = IntervalAnalysisLattice(15)
+    lattice = IntervalAnalysisLattice()
 
     widening_operator = IntervalAnalysisWideningOperator(lattice)
 
