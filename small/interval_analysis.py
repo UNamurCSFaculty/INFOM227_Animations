@@ -1,14 +1,13 @@
 from __future__ import annotations
 
 from enum import StrEnum
-from functools import total_ordering
+from functools import cached_property, total_ordering
 from typing import Any, Iterable
-from small import read_string
-from functools import cached_property
 
 from manim import *
 from manim_dataflow_analysis import *
 
+from small import read_string
 from small.ast import *
 
 
@@ -246,7 +245,7 @@ class IntervalAnalysisWideningOperator(WideningOperator[IntervalAnalysisValue]):
 
     def apply(
         self, last_value: IntervalAnalysisValue, new_value: IntervalAnalysisValue
-    ) -> IntervalAnalysisValue:
+    ) -> tuple[IntervalAnalysisValue, int]:
         match (last_value, new_value):
             case (IntervalExtremum.BOTTOM, l_new):
                 return l_new, 0
@@ -363,13 +362,8 @@ class IntervalAnalysisFlowFunction(FlowFunction[IntervalAnalysisValue]):
                 _,
                 Variable(x),
                 IntBinaryExpression(Variable(y), IntBinaryOperator.ADD, IntConstant(c)),
-            ) if isinstance(abstract_environment[y], FloatIntervalValue):
-                return {
-                    x: FloatIntervalValue(
-                        abstract_environment[y].low + c,
-                        abstract_environment[y].high + c,
-                    )
-                }, 3
+            ) if isinstance(y_value := abstract_environment[y], FloatIntervalValue):
+                return {x: FloatIntervalValue(y_value.low + c, y_value.high + c)}, 3
             case Assignment(
                 _,
                 Variable(x),
@@ -377,13 +371,13 @@ class IntervalAnalysisFlowFunction(FlowFunction[IntervalAnalysisValue]):
             ):
                 return {x: IntervalExtremum.TOP}, 4
             case Assignment(
-                _,
+                i,
                 Variable(x),
                 IntBinaryExpression(IntConstant(c), IntBinaryOperator.ADD, Variable(y)),
             ):
                 variables, _ = self.get_variables(
                     Assignment(
-                        None,
+                        i,
                         Variable(x),
                         IntBinaryExpression(
                             Variable(y), IntBinaryOperator.ADD, IntConstant(c)
@@ -397,10 +391,9 @@ class IntervalAnalysisFlowFunction(FlowFunction[IntervalAnalysisValue]):
                 Variable(x),
                 IntBinaryExpression(Variable(y), IntBinaryOperator.ADD, Variable(z)),
             ) if (
-                isinstance(abstract_environment[y], FloatIntervalValue)
-                and isinstance(abstract_environment[z], FloatIntervalValue)
-                and abstract_environment[y].low + abstract_environment[z].low
-                == float("nan")
+                isinstance(y_value := abstract_environment[y], FloatIntervalValue)
+                and isinstance(z_value := abstract_environment[z], FloatIntervalValue)
+                and y_value.low + z_value.low == float("nan")
             ):
                 return {x: IntervalExtremum.TOP}, 6
             case Assignment(
@@ -408,10 +401,9 @@ class IntervalAnalysisFlowFunction(FlowFunction[IntervalAnalysisValue]):
                 Variable(x),
                 IntBinaryExpression(Variable(y), IntBinaryOperator.ADD, Variable(z)),
             ) if (
-                isinstance(abstract_environment[y], FloatIntervalValue)
-                and isinstance(abstract_environment[z], FloatIntervalValue)
-                and abstract_environment[y].high + abstract_environment[z].high
-                == float("nan")
+                isinstance(y_value := abstract_environment[y], FloatIntervalValue)
+                and isinstance(z_value := abstract_environment[z], FloatIntervalValue)
+                and y_value.high + z_value.high == float("nan")
             ):
                 return {x: IntervalExtremum.TOP}, 7
             case Assignment(
@@ -419,23 +411,24 @@ class IntervalAnalysisFlowFunction(FlowFunction[IntervalAnalysisValue]):
                 Variable(x),
                 IntBinaryExpression(Variable(y), IntBinaryOperator.ADD, Variable(z)),
             ) if (
-                isinstance(abstract_environment[y], FloatIntervalValue)
-                and isinstance(abstract_environment[z], FloatIntervalValue)
-                and abstract_environment[y].low + abstract_environment[z].low
-                == float("inf")
-                and abstract_environment[y].high + abstract_environment[z].high
-                == float("-inf")
+                isinstance(y_value := abstract_environment[y], FloatIntervalValue)
+                and isinstance(z_value := abstract_environment[z], FloatIntervalValue)
+                and y_value.low + z_value.low == float("inf")
+                and y_value.high + z_value.high == float("-inf")
             ):
                 return {x: IntervalExtremum.TOP}, 8
             case Assignment(
                 _,
                 Variable(x),
                 IntBinaryExpression(Variable(y), IntBinaryOperator.ADD, Variable(z)),
+            ) if (
+                isinstance(y_value := abstract_environment[y], FloatIntervalValue)
+                and isinstance(z_value := abstract_environment[z], FloatIntervalValue)
             ):
                 return {
                     x: FloatIntervalValue(
-                        abstract_environment[y].low + abstract_environment[z].low,
-                        abstract_environment[y].high + abstract_environment[z].high,
+                        y_value.low + z_value.low,
+                        y_value.high + z_value.high,
                     )
                 }, 9
             case Assignment(
@@ -443,10 +436,9 @@ class IntervalAnalysisFlowFunction(FlowFunction[IntervalAnalysisValue]):
                 Variable(x),
                 IntBinaryExpression(Variable(y), IntBinaryOperator.MUL, Variable(z)),
             ) if (
-                isinstance(abstract_environment[y], FloatIntervalValue)
-                and isinstance(abstract_environment[z], FloatIntervalValue)
-                and abstract_environment[y].low * abstract_environment[z].low
-                == float("nan")
+                isinstance(y_value := abstract_environment[y], FloatIntervalValue)
+                and isinstance(z_value := abstract_environment[z], FloatIntervalValue)
+                and y_value.low * z_value.low == float("nan")
             ):
                 return {x: IntervalExtremum.TOP}, 10
             case Assignment(
@@ -454,10 +446,9 @@ class IntervalAnalysisFlowFunction(FlowFunction[IntervalAnalysisValue]):
                 Variable(x),
                 IntBinaryExpression(Variable(y), IntBinaryOperator.MUL, Variable(z)),
             ) if (
-                isinstance(abstract_environment[y], FloatIntervalValue)
-                and isinstance(abstract_environment[z], FloatIntervalValue)
-                and abstract_environment[y].high * abstract_environment[z].high
-                == float("nan")
+                isinstance(y_value := abstract_environment[y], FloatIntervalValue)
+                and isinstance(z_value := abstract_environment[z], FloatIntervalValue)
+                and y_value.high * z_value.high == float("nan")
             ):
                 return {x: IntervalExtremum.TOP}, 11
             case Assignment(
@@ -465,12 +456,10 @@ class IntervalAnalysisFlowFunction(FlowFunction[IntervalAnalysisValue]):
                 Variable(x),
                 IntBinaryExpression(Variable(y), IntBinaryOperator.MUL, Variable(z)),
             ) if (
-                isinstance(abstract_environment[y], FloatIntervalValue)
-                and isinstance(abstract_environment[z], FloatIntervalValue)
-                and abstract_environment[y].low * abstract_environment[z].low
-                == float("inf")
-                and abstract_environment[y].high * abstract_environment[z].high
-                == float("-inf")
+                isinstance(y_value := abstract_environment[y], FloatIntervalValue)
+                and isinstance(z_value := abstract_environment[z], FloatIntervalValue)
+                and y_value.low * z_value.low == float("inf")
+                and y_value.high * z_value.high == float("-inf")
             ):
                 return {x: IntervalExtremum.TOP}, 12
             case Assignment(
@@ -478,17 +467,17 @@ class IntervalAnalysisFlowFunction(FlowFunction[IntervalAnalysisValue]):
                 Variable(x),
                 IntBinaryExpression(Variable(y), IntBinaryOperator.MUL, Variable(z)),
             ) if (
-                isinstance(abstract_environment[y], FloatIntervalValue)
-                and isinstance(abstract_environment[z], FloatIntervalValue)
-                and abstract_environment[y].low >= 0
-                and abstract_environment[z].low >= 0
-                and abstract_environment[y].high >= 0
-                and abstract_environment[z].high >= 0
+                isinstance(y_value := abstract_environment[y], FloatIntervalValue)
+                and isinstance(z_value := abstract_environment[z], FloatIntervalValue)
+                and y_value.low >= 0
+                and y_value.high >= 0
+                and z_value.low >= 0
+                and z_value.high >= 0
             ):
                 return {
                     x: FloatIntervalValue(
-                        abstract_environment[y].low * abstract_environment[z].low,
-                        abstract_environment[y].high * abstract_environment[z].high,
+                        y_value.low * z_value.low,
+                        y_value.high * z_value.high,
                     )
                 }, 13
             case Assignment(_, Variable(x), _):
@@ -634,7 +623,7 @@ class IntervalAnalysisConditionUpdateFunction(
             case IntComparisonExpression(
                 Variable(y), IntComparisonOperator.LT, IntConstant(c)
             ):
-                return {y: FloatIntervalValue(float("-inf", c - 1))}, 0
+                return {y: FloatIntervalValue(float("-inf"), c - 1)}, 0
             case IntComparisonExpression(
                 IntConstant(c), IntComparisonOperator.LT, Variable(y)
             ):
@@ -647,12 +636,8 @@ class IntervalAnalysisConditionUpdateFunction(
                 return variables, 1
             case IntComparisonExpression(
                 Variable(y), IntComparisonOperator.LT, Variable(x)
-            ):
-                return {
-                    y: FloatIntervalValue(
-                        float("-inf"), abstract_environment[x].low - 1
-                    )
-                }, 2
+            ) if isinstance(x_value := abstract_environment[x], FloatIntervalValue):
+                return {y: FloatIntervalValue(float("-inf"), x_value.low - 1)}, 2
             case IntComparisonExpression(
                 Variable(y), IntComparisonOperator.GT, IntConstant(c)
             ):
@@ -669,12 +654,8 @@ class IntervalAnalysisConditionUpdateFunction(
                 return variables, 4
             case IntComparisonExpression(
                 Variable(y), IntComparisonOperator.GT, Variable(x)
-            ):
-                return {
-                    y: FloatIntervalValue(
-                        abstract_environment[x].high + 1, float("inf")
-                    )
-                }, 5
+            ) if isinstance(x_value := abstract_environment[x], FloatIntervalValue):
+                return {y: FloatIntervalValue(x_value.high + 1, float("inf"))}, 5
             case IntComparisonExpression(
                 Variable(y), IntComparisonOperator.LTE, IntConstant(c)
             ):
@@ -691,10 +672,8 @@ class IntervalAnalysisConditionUpdateFunction(
                 return variables, 7
             case IntComparisonExpression(
                 Variable(y), IntComparisonOperator.LTE, Variable(x)
-            ):
-                return {
-                    y: FloatIntervalValue(float("-inf"), abstract_environment[x].low)
-                }, 8
+            ) if isinstance(x_value := abstract_environment[x], FloatIntervalValue):
+                return {y: FloatIntervalValue(float("-inf"), x_value.low)}, 8
             case IntComparisonExpression(
                 Variable(y), IntComparisonOperator.GTE, IntConstant(c)
             ):
@@ -711,10 +690,8 @@ class IntervalAnalysisConditionUpdateFunction(
                 return variables, 10
             case IntComparisonExpression(
                 Variable(y), IntComparisonOperator.GTE, Variable(x)
-            ):
-                return {
-                    y: FloatIntervalValue(abstract_environment[x].high, float("inf"))
-                }, 11
+            ) if isinstance(x_value := abstract_environment[x], FloatIntervalValue):
+                return {y: FloatIntervalValue(x_value.high, float("inf"))}, 11
             case IntComparisonExpression(
                 Variable(y), EqualityOperator.EQ, IntConstant(c)
             ):
@@ -742,12 +719,12 @@ class AbstractIntervalAnalysisScene(
 ):
     title = "Interval Analysis"
 
-    sorting_function = sorted
+    sorting_function = sorted  # type: ignore
 
     program_string: str
 
     @cached_property
-    def program(self) -> AstFunction:
+    def program(self) -> AstFunction:  # type: ignore
         return read_string(self.program_string)[0]
 
     lattice = IntervalAnalysisLattice(15)

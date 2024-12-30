@@ -1,14 +1,20 @@
-from small.cst.small.SmallGrammarVisitor import SmallGrammarVisitor
-from small.cst.small.SmallGrammarParser import SmallGrammarParser
-from small.ast.symbol_table import RootSymbolTable, FunctionSymbolTable
+from contextlib import contextmanager
+from typing import Any, Generator, Self, cast
+
 from antlr4 import ParserRuleContext
 from antlr4.tree.Tree import TerminalNodeImpl
-import small.ast as ast
-from typing import Self, cast, Any, Generator
-from contextlib import contextmanager
+
+from small import ast
+from small.ast.symbol_table import FunctionSymbolTable, RootSymbolTable
+from small.cst.small.SmallGrammarParser import SmallGrammarParser
+from small.cst.small.SmallGrammarVisitor import SmallGrammarVisitor
 
 
-def term(node: Any) -> TerminalNodeImpl | None:
+def term(node: Any) -> TerminalNodeImpl:
+    return cast(TerminalNodeImpl, node)
+
+
+def nterm(node: Any) -> TerminalNodeImpl | None:
     return cast(TerminalNodeImpl | None, node)
 
 
@@ -74,7 +80,7 @@ class SmallAstBuilder(SmallGrammarVisitor):
 
     def visitProgram(
         self, ctx: SmallGrammarParser.ProgramContext
-    ) -> tuple[ast.Function]:
+    ) -> tuple[ast.Function, ...]:
         return tuple(
             self.visitFunction(function)
             for function in cast(
@@ -85,12 +91,13 @@ class SmallAstBuilder(SmallGrammarVisitor):
     def visitFunction(self, ctx: SmallGrammarParser.FunctionContext) -> ast.Function:
         name = cast(str, term(ctx.IDENTIFIER()).getText())
 
+        params: tuple[str, ...]
         if (
             param_list := cast(SmallGrammarParser.ParamListContext, ctx.paramList())
         ) is not None:
             params = self.visitParamList(param_list)
         else:
-            params: tuple[str, ...] = tuple()
+            params = ()
 
         with self._new_scope(
             self._root_symbol_table.declare_function(name, params)
@@ -174,9 +181,10 @@ class SmallAstBuilder(SmallGrammarVisitor):
     ) -> ast.Assignment:
         variable = cast(str, term(ctx.IDENTIFIER()).getText())
 
-        if (expr := term(ctx.expr())) is not None:
+        assignment_expr: ast.Expression | ast.FunctionCall
+        if (expr := nterm(ctx.expr())) is not None:
             assignment_expr = self.visitExpr(cast(SmallGrammarParser.ExprContext, expr))
-        elif (func_call := term(ctx.funcCall())) is not None:
+        elif (func_call := nterm(ctx.funcCall())) is not None:
             assignment_expr = self.visitFuncCall(
                 cast(SmallGrammarParser.FuncCallContext, func_call)
             )
@@ -189,7 +197,7 @@ class SmallAstBuilder(SmallGrammarVisitor):
             try:
                 symbol_table.use(variable, assignment_expr.type(symbol_table))
             except ValueError as e:
-                raise UnsupportedRuleException.from_ctx(str(e), ctx)
+                raise UnsupportedRuleException.from_ctx(str(e), ctx) from e
 
         return ast.Assignment(ctx.start.line, ast.Variable(variable), assignment_expr)
 
@@ -223,7 +231,7 @@ class SmallAstBuilder(SmallGrammarVisitor):
             try:
                 symbol_table.return_(expr.type(symbol_table))
             except ValueError as e:
-                raise UnsupportedRuleException.from_ctx(str(e), ctx)
+                raise UnsupportedRuleException.from_ctx(str(e), ctx) from e
 
         return ast.Return(ctx.start.line, expr)
 
@@ -235,38 +243,40 @@ class SmallAstBuilder(SmallGrammarVisitor):
         name = cast(str, term(ctx.IDENTIFIER()).getText())
         expr_list = cast(SmallGrammarParser.ExprListContext | None, ctx.exprList())
 
+        arguments: tuple[ast.Expression, ...]
         if expr_list is None:
-            arguments = []
+            arguments = ()
         else:
             arguments = self.visitExprList(expr_list)
 
         with self._scope() as symbol_table:
             try:
                 self._root_symbol_table.call(
-                    expression.type(symbol_table) for expression in arguments
+                    name,
+                    tuple(expression.type(symbol_table) for expression in arguments),
                 )
             except ValueError as e:
-                raise UnsupportedRuleException.from_ctx(str(e), ctx)
+                raise UnsupportedRuleException.from_ctx(str(e), ctx) from e
 
         return ast.FunctionCall(name, arguments)
 
     def visitExprList(
         self, ctx: SmallGrammarParser.ExprListContext
-    ) -> list[ast.Expression]:
-        return [
+    ) -> tuple[ast.Expression, ...]:
+        return tuple(
             self.visitExpr(expr)
             for expr in cast(list[SmallGrammarParser.ExprContext], ctx.expr())
-        ]
+        )
 
     def visitExpr(self, ctx: SmallGrammarParser.ExprContext) -> ast.Expression:
         if (
-            arithExpr := cast(SmallGrammarParser.ArithExprContext, ctx.arithExpr())
+            arith_expr := cast(SmallGrammarParser.ArithExprContext, ctx.arithExpr())
         ) is not None:
-            return self.visitArithExpr(arithExpr)
+            return self.visitArithExpr(arith_expr)
         elif (
-            boolExpr := cast(SmallGrammarParser.BoolExprContext, ctx.boolExpr())
+            bool_expr := cast(SmallGrammarParser.BoolExprContext, ctx.boolExpr())
         ) is not None:
-            return self.visitBoolExpr(boolExpr)
+            return self.visitBoolExpr(bool_expr)
         else:
             raise UnsupportedRuleException.from_ctx(
                 f"Unsupported expr: {ctx.getText()}", ctx
@@ -278,9 +288,9 @@ class SmallAstBuilder(SmallGrammarVisitor):
         if (noprnd := cast(SmallGrammarParser.NoprndContext, ctx.noprnd())) is not None:
             return self.visitNoprnd(noprnd)
         elif (
-            binMathOp := cast(SmallGrammarParser.BinMathOpContext, ctx.binMathOp())
+            bin_math_op := cast(SmallGrammarParser.BinMathOpContext, ctx.binMathOp())
         ) is not None:
-            return self.visitBinMathOp(binMathOp)
+            return self.visitBinMathOp(bin_math_op)
         else:
             raise UnsupportedRuleException.from_ctx(
                 f"Unsupported arithExpr: {ctx.getText()}", ctx
@@ -291,12 +301,12 @@ class SmallAstBuilder(SmallGrammarVisitor):
     ) -> ast.BoolExpression:
         if (boprnd := cast(SmallGrammarParser.BoprndContext, ctx.boprnd())) is not None:
             return self.visitBoprnd(boprnd)
-        elif (relOp := cast(SmallGrammarParser.RelOpContext, ctx.relOp())) is not None:
-            return self.visitRelOp(relOp)
+        elif (rel_op := cast(SmallGrammarParser.RelOpContext, ctx.relOp())) is not None:
+            return self.visitRelOp(rel_op)
         elif (
-            binLogicOp := cast(SmallGrammarParser.BinLogicOpContext, ctx.binLogicOp())
+            bin_logic_op := cast(SmallGrammarParser.BinLogicOpContext, ctx.binLogicOp())
         ) is not None:
-            return self.visitBinLogicOp(binLogicOp)
+            return self.visitBinLogicOp(bin_logic_op)
         else:
             raise UnsupportedRuleException.from_ctx(
                 f"Unsupported boolExpr: {ctx.getText()}", ctx
@@ -332,6 +342,10 @@ class SmallAstBuilder(SmallGrammarVisitor):
                 return ast.IntComparisonExpression(left, operator, right)
             case ast.EqualityOperator.EQ | ast.EqualityOperator.NEQ:
                 return ast.IntEqualComparisonExpression(left, operator, right)
+            case _:
+                raise UnsupportedRuleException.from_ctx(
+                    f"Unsupported binLogicOp: {ctx.getText()}", ctx
+                )
 
     def visitRelOp(self, ctx: SmallGrammarParser.RelOpContext) -> ast.BoolExpression:
         left = self.visitBoprnd(cast(SmallGrammarParser.BoprndContext, ctx.left))
@@ -345,17 +359,17 @@ class SmallAstBuilder(SmallGrammarVisitor):
                 return ast.BoolComparisonExpression(left, operator, right)
 
     def visitNoprnd(self, ctx: SmallGrammarParser.NoprndContext) -> ast.IntExpression:
-        if (identifier := term(ctx.IDENTIFIER())) is not None:
+        if (identifier := nterm(ctx.IDENTIFIER())) is not None:
             variable = cast(str, identifier.getText())
 
             with self._scope() as symbol_table:
                 try:
                     symbol_table.use(variable, ast.SmallType.INT)
                 except ValueError as e:
-                    raise UnsupportedRuleException.from_ctx(str(e), ctx)
+                    raise UnsupportedRuleException.from_ctx(str(e), ctx) from e
 
             return ast.Variable(variable)
-        elif (number := term(ctx.NUM())) is not None:
+        elif (number := nterm(ctx.NUM())) is not None:
             return ast.IntConstant(int(cast(str, number.getText())))
         else:
             raise UnsupportedRuleException.from_ctx(
@@ -363,24 +377,24 @@ class SmallAstBuilder(SmallGrammarVisitor):
             )
 
     def visitBoprnd(self, ctx: SmallGrammarParser.BoprndContext) -> ast.BoolExpression:
-        if (identifier := term(ctx.IDENTIFIER())) is not None:
+        if (identifier := nterm(ctx.IDENTIFIER())) is not None:
             variable = cast(str, identifier.getText())
 
             with self._scope() as symbol_table:
                 try:
                     symbol_table.use(variable, ast.SmallType.BOOL)
                 except ValueError as e:
-                    raise UnsupportedRuleException.from_ctx(str(e), ctx)
+                    raise UnsupportedRuleException.from_ctx(str(e), ctx) from e
 
             expression = ast.Variable(variable)
 
-            if term(ctx.NOT()) is not None:
+            if nterm(ctx.NOT()) is not None:
                 return ast.BoolNotExpression(expression)
             else:
                 return expression
-        elif term(ctx.TRUE()) is not None:
+        elif nterm(ctx.TRUE()) is not None:
             return ast.BoolConstant(True)
-        elif term(ctx.FALSE()) is not None:
+        elif nterm(ctx.FALSE()) is not None:
             return ast.BoolConstant(False)
         else:
             raise UnsupportedRuleException.from_ctx(
@@ -392,13 +406,13 @@ class SmallAstBuilder(SmallGrammarVisitor):
     def visitMathOp(
         self, ctx: SmallGrammarParser.MathOpContext
     ) -> ast.IntBinaryOperator:
-        if term(ctx.ADD()) is not None:
+        if nterm(ctx.ADD()) is not None:
             return ast.IntBinaryOperator.ADD
-        elif term(ctx.SUBSTRACT()) is not None:
+        elif nterm(ctx.SUBSTRACT()) is not None:
             return ast.IntBinaryOperator.SUB
-        elif term(ctx.MULTIPLY()) is not None:
+        elif nterm(ctx.MULTIPLY()) is not None:
             return ast.IntBinaryOperator.MUL
-        elif term(ctx.DIVIDE()) is not None:
+        elif nterm(ctx.DIVIDE()) is not None:
             return ast.IntBinaryOperator.DIV
         else:
             raise UnsupportedRuleException.from_ctx(
@@ -407,18 +421,18 @@ class SmallAstBuilder(SmallGrammarVisitor):
 
     def visitLogicOp(
         self, ctx: SmallGrammarParser.LogicOpContext
-    ) -> ast.BoolComparisonOperator:
-        if term(ctx.LESS()) is not None:
+    ) -> ast.EqualityOperator | ast.IntComparisonOperator:
+        if nterm(ctx.LESS()) is not None:
             return ast.IntComparisonOperator.LT
-        elif term(ctx.GREATER()) is not None:
+        elif nterm(ctx.GREATER()) is not None:
             return ast.IntComparisonOperator.GT
-        elif term(ctx.EQUAL()) is not None:
+        elif nterm(ctx.EQUAL()) is not None:
             return ast.EqualityOperator.EQ
-        elif term(ctx.DIFFERENT()) is not None:
+        elif nterm(ctx.DIFFERENT()) is not None:
             return ast.EqualityOperator.NEQ
-        elif term(ctx.LESS_EQUAL()) is not None:
+        elif nterm(ctx.LESS_EQUAL()) is not None:
             return ast.IntComparisonOperator.LTE
-        elif term(ctx.GREATER_EQUAL()) is not None:
+        elif nterm(ctx.GREATER_EQUAL()) is not None:
             return ast.IntComparisonOperator.GTE
         else:
             raise UnsupportedRuleException.from_ctx(
@@ -428,13 +442,13 @@ class SmallAstBuilder(SmallGrammarVisitor):
     def visitNop(
         self, ctx: SmallGrammarParser.NopContext
     ) -> ast.EqualityOperator | ast.BoolComparisonOperator:
-        if term(ctx.EQUAL()) is not None:
+        if nterm(ctx.EQUAL()) is not None:
             return ast.EqualityOperator.EQ
-        elif term(ctx.DIFFERENT()) is not None:
+        elif nterm(ctx.DIFFERENT()) is not None:
             return ast.EqualityOperator.NEQ
-        elif term(ctx.AND()) is not None:
+        elif nterm(ctx.AND()) is not None:
             return ast.BoolComparisonOperator.AND
-        elif term(ctx.OR()) is not None:
+        elif nterm(ctx.OR()) is not None:
             return ast.BoolComparisonOperator.OR
         else:
             raise UnsupportedRuleException.from_ctx(
@@ -446,6 +460,6 @@ def build(
     program_cst: SmallGrammarParser.ProgramContext,
     root_symbol_table: RootSymbolTable | None = None,
     program: str | None = None,
-) -> tuple[ast.Function]:
+) -> tuple[ast.Function, ...]:
     builder = SmallAstBuilder(root_symbol_table=root_symbol_table, program=program)
     return builder.visitProgram(program_cst)

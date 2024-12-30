@@ -1,6 +1,7 @@
-from small.cst import parse
+from antlr4 import FileStream, InputStream
+
 from small.ast.builder import build
-from antlr4 import InputStream, FileStream
+from small.cst import parse
 
 
 def read_stream(stream: InputStream):

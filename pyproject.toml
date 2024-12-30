@@ -36,10 +36,16 @@ ruff-ufix = "ruff check --fix --unsafe-fixes ."
 lint = ["black", "ruff", "mypy"]
 build-small-visitor = "antlr4 -Dlanguage=Python3 -visitor -no-listener -o small/cst small/SmallGrammar.g4"
 
+[tool.black]
+exclude = "small/cst/small/*"
+
 [tool.coverage.run]
 relative_files = true
 branch = true
 source = [".", "tests"]
+
+[tool.ruff]
+exclude = ["small/cst/small/*"]
 
 [tool.ruff.lint]
 select = [
@@ -57,6 +63,8 @@ select = [
 
 ignore = [
     "E203",
+    "E501",
+    "N802",
     "N818",
     "C901",
     "PLR0911",
@@ -72,3 +80,4 @@ convention = "google"
 
 [tool.mypy]
 ignore_missing_imports = true
+exclude = "small/cst/small/*"
