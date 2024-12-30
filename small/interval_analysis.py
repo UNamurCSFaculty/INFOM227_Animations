@@ -264,7 +264,7 @@ class IntervalAnalysisFlowFunction(FlowFunction[IntervalAnalysisValue]):
     instances = [
         (
             r"f [[ x = c ]] (\phi)",
-            r"\phi[x \mapsto Z]",
+            r"\phi[x \mapsto [c, c]]",
             r"c \in \mathbb{Z}",
         ),
         (
