@@ -317,6 +317,11 @@ class ZeroAnalysisConditionUpdateFunction(
             None,
         ),
         (
+            r"cg[[ False ]] (\phi)",
+            r"\bot",
+            None,
+        ),
+        (
             r"cg[[ E ]] (\phi)",
             r"\phi",
             r"\text{E is not defined in the other instances}",
@@ -441,8 +446,10 @@ class ZeroAnalysisConditionUpdateFunction(
                     abstract_environment,
                 )
                 return variables, 18
+            case BoolConstant(False):
+                return None, 19
             case _:
-                return {}, 19
+                return {}, 20
 
 
 class AbstractZeroAnalysisScene(
@@ -454,7 +461,7 @@ class AbstractZeroAnalysisScene(
 
     @cached_property
     def program(self) -> AstFunction:  # type: ignore
-        return read_string(self.program_string)[0]
+        return read_string(self.program_string.lstrip("\n"))[0]
 
     lattice = FiniteSizeLattice(
         (ZeroAnalysisValue.BOTTOM, ZeroAnalysisValue.Z),
