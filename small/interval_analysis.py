@@ -869,7 +869,7 @@ class AbstractIntervalAnalysisScene(
 
     @cached_property
     def program(self) -> AstFunction:  # type: ignore
-        return read_string(self.program_string)[0]
+        return read_string(self.program_string.lstrip("\n"))[0]
 
     lattice = IntervalAnalysisLattice()
 
