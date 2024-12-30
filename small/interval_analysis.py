@@ -544,12 +544,12 @@ class IntervalAnalysisConditionUpdateFunction(
         (
             r"cg[[ y < x ]] (\phi)",
             r"\phi[y \mapsto [-\infty, \phi(x).low - 1]",
-            r"\phi(y) = \bot",
+            r"\phi(y) \in \{\bot, \top\}",
         ),
         (
             r"cg[[ y < x ]] (\phi)",
             r"\phi[x \mapsto [\phi(y).high + 1, +\infty]]",
-            r"\phi(x) = \bot",
+            r"\phi(x) \in \{\bot, \top\}",
         ),
         (
             r"cg[[ y > c ]] (\phi)",
@@ -569,12 +569,12 @@ class IntervalAnalysisConditionUpdateFunction(
         (
             r"cg[[ y > x ]] (\phi)",
             r"\phi[y \mapsto [\phi(x).high + 1, +\infty]]",
-            r"\phi(y) = \bot",
+            r"\phi(y) \in \{\bot, \top\}",
         ),
         (
             r"cg[[ y > x ]] (\phi)",
             r"\phi[x \mapsto [-\infty, \phi(y).low - 1]]",
-            r"\phi(x) = \bot",
+            r"\phi(x) \in \{\bot, \top\}",
         ),
         (
             r"cg[[ y <= c ]] (\phi)",
@@ -594,12 +594,12 @@ class IntervalAnalysisConditionUpdateFunction(
         (
             r"cg[[ y <= x ]] (\phi)",
             r"\phi[y \mapsto [-\infty, \phi(x).low]]",
-            r"\phi(y) = \bot",
+            r"\phi(y) \in \{\bot, \top\}",
         ),
         (
             r"cg[[ y <= x ]] (\phi)",
             r"\phi[x \mapsto [\phi(y).high, +\infty]]",
-            r"\phi(x) = \bot",
+            r"\phi(x) \in \{\bot, \top\}",
         ),
         (
             r"cg[[ y >= c ]] (\phi)",
@@ -619,12 +619,12 @@ class IntervalAnalysisConditionUpdateFunction(
         (
             r"cg[[ y >= x ]] (\phi)",
             r"\phi[y \mapsto [\phi(x).high, +\infty]]",
-            r"\phi(y) = \bot",
+            r"\phi(y) \in \{\bot, \top\}",
         ),
         (
             r"cg[[ y >= x ]] (\phi)",
             r"\phi[y \mapsto [-\infty, \phi(y).low]]",
-            r"\phi(x) = \bot",
+            r"\phi(x) \in \{\bot, \top\}",
         ),
         (
             r"cg[[ y == c ]] (\phi)",
@@ -691,7 +691,8 @@ class IntervalAnalysisConditionUpdateFunction(
             case IntComparisonExpression(
                 Variable(y), IntComparisonOperator.LT, Variable(x)
             ) if (
-                abstract_environment[y] == IntervalExtremum.BOTTOM
+                abstract_environment[y]
+                in (IntervalExtremum.BOTTOM, IntervalExtremum.TOP)
                 and isinstance(x_value := abstract_environment[x], FloatIntervalValue)
             ):
                 return {y: FloatIntervalValue(float("-inf"), x_value.low - 1)}, 3
@@ -699,7 +700,8 @@ class IntervalAnalysisConditionUpdateFunction(
                 Variable(y), IntComparisonOperator.LT, Variable(x)
             ) if (
                 isinstance(y_value := abstract_environment[y], FloatIntervalValue)
-                and abstract_environment[x] == IntervalExtremum.BOTTOM
+                and abstract_environment[x]
+                in (IntervalExtremum.BOTTOM, IntervalExtremum.TOP)
             ):
                 return {x: FloatIntervalValue(y_value.high + 1, float("inf"))}, 4
             case IntComparisonExpression(
@@ -729,7 +731,8 @@ class IntervalAnalysisConditionUpdateFunction(
             case IntComparisonExpression(
                 Variable(y), IntComparisonOperator.GT, Variable(x)
             ) if (
-                abstract_environment[y] == IntervalExtremum.BOTTOM
+                abstract_environment[y]
+                in (IntervalExtremum.BOTTOM, IntervalExtremum.TOP)
                 and isinstance(x_value := abstract_environment[x], FloatIntervalValue)
             ):
                 return {y: FloatIntervalValue(x_value.high + 1, float("inf"))}, 8
@@ -737,7 +740,8 @@ class IntervalAnalysisConditionUpdateFunction(
                 Variable(y), IntComparisonOperator.GT, Variable(x)
             ) if (
                 isinstance(y_value := abstract_environment[y], FloatIntervalValue)
-                and abstract_environment[x] == IntervalExtremum.BOTTOM
+                and abstract_environment[x]
+                in (IntervalExtremum.BOTTOM, IntervalExtremum.TOP)
             ):
                 return {x: FloatIntervalValue(float("-inf"), y_value.low - 1)}, 9
             case IntComparisonExpression(
@@ -767,7 +771,8 @@ class IntervalAnalysisConditionUpdateFunction(
             case IntComparisonExpression(
                 Variable(y), IntComparisonOperator.LTE, Variable(x)
             ) if (
-                abstract_environment[y] == IntervalExtremum.BOTTOM
+                abstract_environment[y]
+                in (IntervalExtremum.BOTTOM, IntervalExtremum.TOP)
                 and isinstance(x_value := abstract_environment[x], FloatIntervalValue)
             ):
                 return {y: FloatIntervalValue(float("-inf"), x_value.low)}, 13
@@ -775,7 +780,8 @@ class IntervalAnalysisConditionUpdateFunction(
                 Variable(y), IntComparisonOperator.LTE, Variable(x)
             ) if (
                 isinstance(y_value := abstract_environment[y], FloatIntervalValue)
-                and abstract_environment[x] == IntervalExtremum.BOTTOM
+                and abstract_environment[x]
+                in (IntervalExtremum.BOTTOM, IntervalExtremum.TOP)
             ):
                 return {x: FloatIntervalValue(y_value.high, float("inf"))}, 14
             case IntComparisonExpression(
@@ -805,7 +811,8 @@ class IntervalAnalysisConditionUpdateFunction(
             case IntComparisonExpression(
                 Variable(y), IntComparisonOperator.GTE, Variable(x)
             ) if (
-                abstract_environment[y] == IntervalExtremum.BOTTOM
+                abstract_environment[y]
+                in (IntervalExtremum.BOTTOM, IntervalExtremum.TOP)
                 and isinstance(x_value := abstract_environment[x], FloatIntervalValue)
             ):
                 return {y: FloatIntervalValue(x_value.high, float("inf"))}, 18
@@ -813,7 +820,8 @@ class IntervalAnalysisConditionUpdateFunction(
                 Variable(y), IntComparisonOperator.GTE, Variable(x)
             ) if (
                 isinstance(y_value := abstract_environment[y], FloatIntervalValue)
-                and abstract_environment[x] == IntervalExtremum.BOTTOM
+                and abstract_environment[x]
+                in (IntervalExtremum.BOTTOM, IntervalExtremum.TOP)
             ):
                 return {x: FloatIntervalValue(float("-inf"), y_value.low)}, 19
             case IntComparisonExpression(
