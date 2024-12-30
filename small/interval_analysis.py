@@ -4,7 +4,6 @@ from enum import StrEnum
 from functools import cached_property, total_ordering
 from typing import Any, Iterable
 
-from manim import *
 from manim_dataflow_analysis import *
 
 from small import read_string
