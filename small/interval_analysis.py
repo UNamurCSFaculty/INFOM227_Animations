@@ -298,17 +298,17 @@ class IntervalAnalysisFlowFunction(FlowFunction[IntervalAnalysisValue]):
             r"\phi(y).low +_\infty \phi(z).low = ?",
         ),
         (
-            r"",
+            r"f [[ x = y + z ]] (\phi)",
             r"\phi[x \mapsto \top]",
             r"\phi(y).high +_\infty \phi(z).high = ?",
         ),
         (
-            r"",
+            r"f [[ x = y + z ]] (\phi)",
             r"\phi[x \mapsto \top]",
             r"\phi(y).low +_\infty \phi(z).low = +\infty \wedge \phi(y).high +_\infty \phi(z).high = -\infty",
         ),
         (
-            r"",
+            r"f [[ x = y + z ]] (\phi)",
             r"\phi[x \mapsto [\phi(y).low +_\infty \phi(z).low, \phi(y).high +_\infty \phi(z).high]]",
             r"",
         ),
@@ -318,17 +318,17 @@ class IntervalAnalysisFlowFunction(FlowFunction[IntervalAnalysisValue]):
             r"\phi(y).low *_\infty \phi(z).low = ?",
         ),
         (
-            r"",
+            r"f [[ x = y * z ]] (\phi)",
             r"\phi[x \mapsto \top]",
             r"\phi(y).high *_\infty \phi(z).high = ?",
         ),
         (
-            r"",
+            r"f [[ x = y * z ]] (\phi)",
             r"\phi[x \mapsto \top]",
             r"\phi(y).low *_\infty \phi(z).low = +\infty \wedge \phi(y).high *_\infty \phi(z).high = -\infty",
         ),
         (
-            r"",
+            r"f [[ x = y * z ]] (\phi)",
             r"\phi[x \mapsto [\phi(y).low *_\infty \phi(z).low, \phi(y).high *_\infty \phi(z).high]]",
             r"\phi(y).low \geq 0 \wedge \phi(z).low \geq 0 \wedge \phi(y).high \geq 0 \wedge \phi(z).high \geq 0",
         ),
