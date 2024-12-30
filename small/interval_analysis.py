@@ -3,6 +3,8 @@ from __future__ import annotations
 from enum import StrEnum
 from functools import total_ordering
 from typing import Any, Iterable
+from small import read_string
+from functools import cached_property
 
 from manim import *
 from manim_dataflow_analysis import *
@@ -223,11 +225,535 @@ class IntervalAnalysisLattice(Lattice[IntervalAnalysisValue]):
                 return self.bottom()
 
 
-class IntervalAnalysisScene(
+class IntervalAnalysisWideningOperator(WideningOperator[IntervalAnalysisValue]):
+    instances = [
+        (
+            r"W(\bot, l_{new})",
+            r"l_{new}",
+        ),
+        (
+            r"W([a, b], [c, d])",
+            r"[if\ a \leq c\ then\ a\ else\ -\infty,\ if\ b \geq d\ then\ b\ else\ +\infty]",
+        ),
+        (
+            r"W(last, new)",
+            r"last \sqcup new",
+        ),
+    ]
+
+    def __init__(self, lattice: IntervalAnalysisLattice):
+        self._lattice = lattice
+
+    def apply(
+        self, last_value: IntervalAnalysisValue, new_value: IntervalAnalysisValue
+    ) -> IntervalAnalysisValue:
+        match (last_value, new_value):
+            case (IntervalExtremum.BOTTOM, l_new):
+                return l_new, 0
+            case (FloatIntervalValue(a, b), FloatIntervalValue(c, d)):
+                return (
+                    FloatIntervalValue(
+                        a if a <= c else float("-inf"),
+                        b if b >= d else float("inf"),
+                    ),
+                    1,
+                )
+            case _:
+                return self._lattice.join(last_value, new_value), 2
+
+
+class IntervalAnalysisFlowFunction(FlowFunction[IntervalAnalysisValue]):
+    instances = [
+        (
+            r"f [[ x = c ]] (\phi)",
+            r"\phi[x \mapsto Z]",
+            r"c \in \mathbb{Z}",
+        ),
+        (
+            r"f [[ x = y ]] (\phi)",
+            r"\phi[x \mapsto \phi(y)]",
+            r"y \in < Var >",
+        ),
+        (
+            r"f [[ x = c + d ]] (\phi)",
+            r"\phi[x \mapsto [c + d, c + d]]",
+            r"c \in \mathbb{Z} \wedge d \in \mathbb{Z}",
+        ),
+        (
+            r"f [[ x = y + c ]] (\phi)",
+            r"\phi[x \mapsto [\phi(y).low +_\infty c, \phi(y).high +_\infty c]]",
+            r"c \in \mathbb{Z}",
+        ),
+        (
+            r"f [[ x = y + c ]] (\phi)",
+            r"\phi[x \mapsto \top]",
+            r"",
+        ),
+        (
+            r"f [[ x = c + y ]] (\phi)",
+            r"\phi[x \mapsto f [[ x = y + c ]] (\phi)]",
+            None,
+        ),
+        (
+            r"f [[ x = y + z ]] (\phi)",
+            r"\phi[x \mapsto \top]",
+            r"\phi(y).low +_\infty \phi(z).low = ?",
+        ),
+        (
+            r"",
+            r"\phi[x \mapsto \top]",
+            r"\phi(y).high +_\infty \phi(z).high = ?",
+        ),
+        (
+            r"",
+            r"\phi[x \mapsto \top]",
+            r"\phi(y).low +_\infty \phi(z).low = +\infty \wedge \phi(y).high +_\infty \phi(z).high = -\infty",
+        ),
+        (
+            r"",
+            r"\phi[x \mapsto [\phi(y).low +_\infty \phi(z).low, \phi(y).high +_\infty \phi(z).high]]",
+            r"",
+        ),
+        (
+            r"f [[ x = y * z ]] (\phi)",
+            r"\phi[x \mapsto \top]",
+            r"\phi(y).low *_\infty \phi(z).low = ?",
+        ),
+        (
+            r"",
+            r"\phi[x \mapsto \top]",
+            r"\phi(y).high *_\infty \phi(z).high = ?",
+        ),
+        (
+            r"",
+            r"\phi[x \mapsto \top]",
+            r"\phi(y).low *_\infty \phi(z).low = +\infty \wedge \phi(y).high *_\infty \phi(z).high = -\infty",
+        ),
+        (
+            r"",
+            r"\phi[x \mapsto [\phi(y).low *_\infty \phi(z).low, \phi(y).high *_\infty \phi(z).high]]",
+            r"\phi(y).low \geq 0 \wedge \phi(z).low \geq 0 \wedge \phi(y).high \geq 0 \wedge \phi(z).high \geq 0",
+        ),
+        (
+            r"f [[ x = E ]] (\phi)",
+            r"\phi[x \mapsto U]",
+            r"\text{E is any other case}",
+        ),
+    ]
+
+    def get_variables(
+        self,
+        statement: AstStatement,
+        abstract_environment: AbstractEnvironment[IntervalAnalysisValue],
+    ) -> tuple[dict[str, IntervalAnalysisValue], int]:
+        match statement:
+            case Assignment(_, Variable(x), IntConstant(c)):
+                return {x: FloatIntervalValue(c, c)}, 0
+            case Assignment(_, Variable(x), Variable(y)):
+                return {x: abstract_environment[y]}, 1
+            case Assignment(
+                _,
+                Variable(x),
+                IntBinaryExpression(
+                    IntConstant(c), IntBinaryOperator.ADD, IntConstant(d)
+                ),
+            ):
+                return {x: FloatIntervalValue(c + d, c + d)}, 2
+            case Assignment(
+                _,
+                Variable(x),
+                IntBinaryExpression(Variable(y), IntBinaryOperator.ADD, IntConstant(c)),
+            ) if isinstance(abstract_environment[y], FloatIntervalValue):
+                return {
+                    x: FloatIntervalValue(
+                        abstract_environment[y].low + c,
+                        abstract_environment[y].high + c,
+                    )
+                }, 3
+            case Assignment(
+                _,
+                Variable(x),
+                IntBinaryExpression(Variable(y), IntBinaryOperator.ADD, IntConstant(c)),
+            ):
+                return {x: IntervalExtremum.TOP}, 4
+            case Assignment(
+                _,
+                Variable(x),
+                IntBinaryExpression(IntConstant(c), IntBinaryOperator.ADD, Variable(y)),
+            ):
+                variables, _ = self.get_variables(
+                    Assignment(
+                        None,
+                        Variable(x),
+                        IntBinaryExpression(
+                            Variable(y), IntBinaryOperator.ADD, IntConstant(c)
+                        ),
+                    ),
+                    abstract_environment,
+                )
+                return variables, 5
+            case Assignment(
+                _,
+                Variable(x),
+                IntBinaryExpression(Variable(y), IntBinaryOperator.ADD, Variable(z)),
+            ) if (
+                isinstance(abstract_environment[y], FloatIntervalValue)
+                and isinstance(abstract_environment[z], FloatIntervalValue)
+                and abstract_environment[y].low + abstract_environment[z].low
+                == float("nan")
+            ):
+                return {x: IntervalExtremum.TOP}, 6
+            case Assignment(
+                _,
+                Variable(x),
+                IntBinaryExpression(Variable(y), IntBinaryOperator.ADD, Variable(z)),
+            ) if (
+                isinstance(abstract_environment[y], FloatIntervalValue)
+                and isinstance(abstract_environment[z], FloatIntervalValue)
+                and abstract_environment[y].high + abstract_environment[z].high
+                == float("nan")
+            ):
+                return {x: IntervalExtremum.TOP}, 7
+            case Assignment(
+                _,
+                Variable(x),
+                IntBinaryExpression(Variable(y), IntBinaryOperator.ADD, Variable(z)),
+            ) if (
+                isinstance(abstract_environment[y], FloatIntervalValue)
+                and isinstance(abstract_environment[z], FloatIntervalValue)
+                and abstract_environment[y].low + abstract_environment[z].low
+                == float("inf")
+                and abstract_environment[y].high + abstract_environment[z].high
+                == float("-inf")
+            ):
+                return {x: IntervalExtremum.TOP}, 8
+            case Assignment(
+                _,
+                Variable(x),
+                IntBinaryExpression(Variable(y), IntBinaryOperator.ADD, Variable(z)),
+            ):
+                return {
+                    x: FloatIntervalValue(
+                        abstract_environment[y].low + abstract_environment[z].low,
+                        abstract_environment[y].high + abstract_environment[z].high,
+                    )
+                }, 9
+            case Assignment(
+                _,
+                Variable(x),
+                IntBinaryExpression(Variable(y), IntBinaryOperator.MUL, Variable(z)),
+            ) if (
+                isinstance(abstract_environment[y], FloatIntervalValue)
+                and isinstance(abstract_environment[z], FloatIntervalValue)
+                and abstract_environment[y].low * abstract_environment[z].low
+                == float("nan")
+            ):
+                return {x: IntervalExtremum.TOP}, 10
+            case Assignment(
+                _,
+                Variable(x),
+                IntBinaryExpression(Variable(y), IntBinaryOperator.MUL, Variable(z)),
+            ) if (
+                isinstance(abstract_environment[y], FloatIntervalValue)
+                and isinstance(abstract_environment[z], FloatIntervalValue)
+                and abstract_environment[y].high * abstract_environment[z].high
+                == float("nan")
+            ):
+                return {x: IntervalExtremum.TOP}, 11
+            case Assignment(
+                _,
+                Variable(x),
+                IntBinaryExpression(Variable(y), IntBinaryOperator.MUL, Variable(z)),
+            ) if (
+                isinstance(abstract_environment[y], FloatIntervalValue)
+                and isinstance(abstract_environment[z], FloatIntervalValue)
+                and abstract_environment[y].low * abstract_environment[z].low
+                == float("inf")
+                and abstract_environment[y].high * abstract_environment[z].high
+                == float("-inf")
+            ):
+                return {x: IntervalExtremum.TOP}, 12
+            case Assignment(
+                _,
+                Variable(x),
+                IntBinaryExpression(Variable(y), IntBinaryOperator.MUL, Variable(z)),
+            ) if (
+                isinstance(abstract_environment[y], FloatIntervalValue)
+                and isinstance(abstract_environment[z], FloatIntervalValue)
+                and abstract_environment[y].low >= 0
+                and abstract_environment[z].low >= 0
+                and abstract_environment[y].high >= 0
+                and abstract_environment[z].high >= 0
+            ):
+                return {
+                    x: FloatIntervalValue(
+                        abstract_environment[y].low * abstract_environment[z].low,
+                        abstract_environment[y].high * abstract_environment[z].high,
+                    )
+                }, 13
+            case Assignment(_, Variable(x), _):
+                return {x: IntervalExtremum.TOP}, 14
+            case _:
+                raise ValueError(f"Unsupported statement: {statement}")
+
+
+class IntervalAnalysisControlFlowFunction(ControlFlowFunction[IntervalAnalysisValue]):
+    instances = [
+        (
+            r"fg [[ p ]] (\phi)",
+            r"f [[ P[p] ]] (\phi)",
+            r"P[p] \equiv x = E",
+        ),
+        (
+            r"fg [[ p ]] (\phi)",
+            r"\phi",
+            r"P[p] \equiv \text{while (E)} \lor P[p] \equiv \text{if (E)} \lor P[p] \equiv \text{return E}",  # noqa: E501
+        ),
+    ]
+
+    flow_function = IntervalAnalysisFlowFunction()
+
+    def get_variables(
+        self,
+        program_point: ProgramPoint,
+        abstract_environment: AbstractEnvironment[IntervalAnalysisValue],
+    ) -> tuple[dict[str, IntervalAnalysisValue], int | tuple[int, int]]:
+        match program_point:
+            case ProgramPoint(_, Assignment(i, Variable(x), expression)):
+                variables, instance_id = self.flow_function.get_variables(
+                    Assignment(i, Variable(x), expression), abstract_environment
+                )
+                return variables, (0, instance_id)
+            case (
+                ProgramPoint(_, While(_, _, _))
+                | ProgramPoint(_, IfElse(_, _, _, _))
+                | ProgramPoint(_, Return(_, _))
+            ):
+                return {}, 1
+            case _:
+                raise ValueError(f"Unsupported program point: {program_point}")
+
+
+class IntervalAnalysisConditionUpdateFunction(
+    ConditionUpdateFunction[IntervalAnalysisValue, BoolExpression]
+):
+    instances = [
+        (
+            r"cg[[ y < c ]] (\phi)",
+            r"\phi[y \mapsto [-\infty, c - 1]]",
+            r"c \in \mathbb{Z}",
+        ),
+        (
+            r"cg[[ c < y ]] (\phi)",
+            r"cg[[ y > c ]] (\phi)",
+            None,
+        ),
+        (
+            r"cg[[ y < x ]] (\phi)",
+            r"\phi[y \mapsto [-\infty, \phi(x).low - 1]]",
+            None,
+        ),
+        (
+            r"cg[[ y > c ]] (\phi)",
+            r"\phi[y \mapsto [c + 1, +\infty]]",
+            r"c \in \mathbb{Z}",
+        ),
+        (
+            r"cg[[ c > y ]] (\phi)",
+            r"cg[[ y < c ]] (\phi)",
+            None,
+        ),
+        (
+            r"cg[[ y > x ]] (\phi)",
+            r"\phi[y \mapsto [\phi(x).high + 1, +\infty]]",
+            None,
+        ),
+        (
+            r"cg[[ y <= c ]] (\phi)",
+            r"\phi[y \mapsto [-\infty, c]]",
+            r"c \in \mathbb{Z}",
+        ),
+        (
+            r"cg[[ c <= y ]] (\phi)",
+            r"cg[[ y >= c ]] (\phi)",
+            None,
+        ),
+        (
+            r"cg[[ y <= x ]] (\phi)",
+            r"\phi[y \mapsto [-\infty, \phi(x).low]]",
+            None,
+        ),
+        (
+            r"cg[[ y >= c ]] (\phi)",
+            r"\phi[y \mapsto [c, \infty]]",
+            r"c \in \mathbb{Z}",
+        ),
+        (
+            r"cg[[ c >= y ]] (\phi)",
+            r"cg[[ y <= c ]] (\phi)",
+            None,
+        ),
+        (
+            r"cg[[ y >= x ]] (\phi)",
+            r"\phi[y \mapsto [\phi(x).high, +\infty]]",
+            None,
+        ),
+        (
+            r"cg[[ y == c ]] (\phi)",
+            r"\phi[y \mapsto [c, c]]",
+            r"c \in \mathbb{Z}",
+        ),
+        (
+            r"cg[[ c == y ]] (\phi)",
+            r"cg[[ y == c ]] (\phi)",
+            None,
+        ),
+        (
+            r"cg[[ y == x ]] (\phi)",
+            r"\phi[y \mapsto \phi(x)]",
+            None,
+        ),
+        (
+            r"cg[[ False ]] (\phi)",
+            r"\bot",
+            None,
+        ),
+        (
+            r"cg[[ E ]] (\phi)",
+            r"\phi",
+            r"\text{E is not defined in the other instances}",
+        ),
+    ]
+
+    def get_variables(
+        self,
+        condition: BoolExpression,
+        abstract_environment: AbstractEnvironment[IntervalAnalysisValue],
+    ) -> tuple[dict[str, IntervalAnalysisValue] | None, int]:
+        match condition:
+            case IntComparisonExpression(
+                Variable(y), IntComparisonOperator.LT, IntConstant(c)
+            ):
+                return {y: FloatIntervalValue(float("-inf", c - 1))}, 0
+            case IntComparisonExpression(
+                IntConstant(c), IntComparisonOperator.LT, Variable(y)
+            ):
+                variables, _ = self.get_variables(
+                    IntComparisonExpression(
+                        Variable(y), IntComparisonOperator.GT, IntConstant(c)
+                    ),
+                    abstract_environment,
+                )
+                return variables, 1
+            case IntComparisonExpression(
+                Variable(y), IntComparisonOperator.LT, Variable(x)
+            ):
+                return {
+                    y: FloatIntervalValue(
+                        float("-inf"), abstract_environment[x].low - 1
+                    )
+                }, 2
+            case IntComparisonExpression(
+                Variable(y), IntComparisonOperator.GT, IntConstant(c)
+            ):
+                return {y: FloatIntervalValue(c + 1, float("inf"))}, 3
+            case IntComparisonExpression(
+                IntConstant(c), IntComparisonOperator.GT, Variable(y)
+            ):
+                variables, _ = self.get_variables(
+                    IntComparisonExpression(
+                        Variable(y), IntComparisonOperator.LT, IntConstant(c)
+                    ),
+                    abstract_environment,
+                )
+                return variables, 4
+            case IntComparisonExpression(
+                Variable(y), IntComparisonOperator.GT, Variable(x)
+            ):
+                return {
+                    y: FloatIntervalValue(
+                        abstract_environment[x].high + 1, float("inf")
+                    )
+                }, 5
+            case IntComparisonExpression(
+                Variable(y), IntComparisonOperator.LTE, IntConstant(c)
+            ):
+                return {y: FloatIntervalValue(float("-inf"), c)}, 6
+            case IntComparisonExpression(
+                IntConstant(c), IntComparisonOperator.LTE, Variable(y)
+            ):
+                variables, _ = self.get_variables(
+                    IntComparisonExpression(
+                        Variable(y), IntComparisonOperator.GTE, IntConstant(c)
+                    ),
+                    abstract_environment,
+                )
+                return variables, 7
+            case IntComparisonExpression(
+                Variable(y), IntComparisonOperator.LTE, Variable(x)
+            ):
+                return {
+                    y: FloatIntervalValue(float("-inf"), abstract_environment[x].low)
+                }, 8
+            case IntComparisonExpression(
+                Variable(y), IntComparisonOperator.GTE, IntConstant(c)
+            ):
+                return {y: FloatIntervalValue(c, float("inf"))}, 9
+            case IntComparisonExpression(
+                IntConstant(c), IntComparisonOperator.GTE, Variable(y)
+            ):
+                variables, _ = self.get_variables(
+                    IntComparisonExpression(
+                        Variable(y), IntComparisonOperator.LTE, IntConstant(c)
+                    ),
+                    abstract_environment,
+                )
+                return variables, 10
+            case IntComparisonExpression(
+                Variable(y), IntComparisonOperator.GTE, Variable(x)
+            ):
+                return {
+                    y: FloatIntervalValue(abstract_environment[x].high, float("inf"))
+                }, 11
+            case IntComparisonExpression(
+                Variable(y), EqualityOperator.EQ, IntConstant(c)
+            ):
+                return {y: FloatIntervalValue(c, c)}, 12
+            case IntComparisonExpression(
+                IntConstant(c), EqualityOperator.EQ, Variable(y)
+            ):
+                variables, _ = self.get_variables(
+                    IntComparisonExpression(
+                        Variable(y), EqualityOperator.EQ, IntConstant(c)
+                    ),
+                    abstract_environment,
+                )
+                return variables, 13
+            case IntComparisonExpression(Variable(y), EqualityOperator.EQ, Variable(x)):
+                return {y: abstract_environment[x]}, 14
+            case BoolConstant(False):
+                return None, 15
+            case _:
+                return {}, 16
+
+
+class AbstractIntervalAnalysisScene(
     AbstractAnalysisScene[IntervalAnalysisValue, BoolExpression]
 ):
     title = "Interval Analysis"
 
     sorting_function = sorted
 
+    program_string: str
+
+    @cached_property
+    def program(self) -> AstFunction:
+        return read_string(self.program_string)[0]
+
     lattice = IntervalAnalysisLattice(15)
+
+    widening_operator = IntervalAnalysisWideningOperator(lattice)
+
+    control_flow_function = IntervalAnalysisControlFlowFunction()
+
+    condition_update_function = IntervalAnalysisConditionUpdateFunction()
