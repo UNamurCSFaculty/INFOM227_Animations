@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -50,6 +51,11 @@ class FunctionSymbolTable:
                 f"Variable {variable} has never been used in this function"
             )
 
+        if wrapped_type.type is None:
+            raise ValueError(
+                f"Variable {variable} has been used but never assigned a type"
+            )
+
         return wrapped_type.type
 
     def variables(self) -> frozenset[str]:
@@ -57,7 +63,7 @@ class FunctionSymbolTable:
 
 
 class RootSymbolTable:
-    def __init__(self):
+    def __init__(self) -> None:
         self._functions: dict[
             str,
             tuple[dict[str, SmallTypeWrapper], SmallTypeWrapper],
@@ -87,7 +93,7 @@ class RootSymbolTable:
 
         return function_symbol_table
 
-    def call(self, name: str, argument_types: tuple[SmallType]) -> None:
+    def call(self, name: str, argument_types: tuple[SmallType, ...]) -> None:
         function = self._functions.get(name)
 
         if function is None:
@@ -124,3 +130,16 @@ class RootSymbolTable:
             raise ValueError(
                 f"Function {name} returned with wrong return type: {return_type}"
             )
+
+    def get_return_type(self, name: str) -> SmallType:
+        function = self._functions.get(name)
+
+        if function is None:
+            raise ValueError(f"Function {name} not declared")
+
+        _, current_return_type = function
+
+        if current_return_type.type is None:
+            raise ValueError(f"Function {name} has no return type")
+
+        return current_return_type.type

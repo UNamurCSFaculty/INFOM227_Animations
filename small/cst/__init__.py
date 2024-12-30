@@ -1,5 +1,6 @@
-from antlr4 import InputStream, CommonTokenStream
+from antlr4 import CommonTokenStream, InputStream
 from antlr4.Recognizer import ConsoleErrorListener
+
 from small.cst.small.SmallGrammarLexer import SmallGrammarLexer
 from small.cst.small.SmallGrammarParser import SmallGrammarParser
 
@@ -13,7 +14,9 @@ def parse(stream: InputStream):
     errors: list[str] = []
 
     class ErrorListener(ConsoleErrorListener):
-        def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):
+        def syntaxError(
+            self, recognizer, offendingSymbol, line, column, msg, e  # noqa: N803
+        ):
             errors.append(f"line {line}:{column} {msg}")
 
     parser.addErrorListener(ErrorListener())

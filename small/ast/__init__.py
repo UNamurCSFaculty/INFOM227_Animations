@@ -2,10 +2,10 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import StrEnum
+from typing import TYPE_CHECKING
 
 import networkx as nx
 from manim_dataflow_analysis import *
-from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from small.ast.symbol_table import FunctionSymbolTable
@@ -222,6 +222,7 @@ BoolExpression = (
     | BoolNotExpression
     | IntComparisonExpression
     | IntEqualComparisonExpression
+    | BoolComparisonExpression
     | BoolEqualComparisonExpression
 )
 
@@ -233,6 +234,9 @@ Expression = IntExpression | BoolExpression
 class FunctionCall:
     name: str
     arguments: tuple[Expression, ...]
+
+    def type(self, symbol_table: FunctionSymbolTable) -> SmallType:
+        return symbol_table.root.get_return_type(self.name)
 
     def __str__(self) -> str:
         return f"{self.name}({', '.join(str(arg) for arg in self.arguments)})"
@@ -378,7 +382,7 @@ class Return(AstStatement):
         return f"{self.header};"
 
 
-Statement = Assignment | IfElse | While
+Statement = Assignment | IfElse | While | Return
 
 
 # Program

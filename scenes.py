@@ -1,3 +1,4 @@
+from small.interval_analysis import AbstractIntervalAnalysisScene
 from small.zero_analysis import AbstractZeroAnalysisScene
 
 
@@ -141,6 +142,22 @@ class ComplexZeroAnalysisScene(AbstractZeroAnalysisScene):
                     }
                 }
                 y = 2 + x;
+            }
+            return y;
+        }
+        """
+
+
+class SimpleIntervalAnalysisScene(AbstractIntervalAnalysisScene):
+    title = "Simple Interval Analysis"
+
+    program_string = """
+        function main(a) {
+            y = 1;
+            if (False) {
+                y = 2;
+            } else {
+                y = 4;
             }
             return y;
         }
