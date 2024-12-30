@@ -34,6 +34,8 @@ SEMICOLON: ';';
 
 ASSIGN: '=';
 
+NOT: 'not';
+
 AND: 'and';
 
 OR: 'or';
@@ -134,7 +136,7 @@ relOp: left = boprnd nop right = boprnd;
 
 noprnd: IDENTIFIER | NUM;
 
-boprnd: IDENTIFIER | TRUE | FALSE;
+boprnd: IDENTIFIER | TRUE | FALSE | NOT IDENTIFIER;
 
 // Operators
 
