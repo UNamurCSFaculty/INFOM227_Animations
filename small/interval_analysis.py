@@ -334,7 +334,7 @@ class IntervalAnalysisFlowFunction(FlowFunction[IntervalAnalysisValue]):
         ),
         (
             r"f [[ x = E ]] (\phi)",
-            r"\phi[x \mapsto U]",
+            r"\phi[x \mapsto \top]",
             r"\text{E is any other case}",
         ),
     ]
