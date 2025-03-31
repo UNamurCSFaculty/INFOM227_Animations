@@ -2,6 +2,8 @@
 
 INFOM277 Animations contains the code to generate animations for the course INFOM227.
 
+![Example](https://github.com/user-attachments/assets/9f9258d6-a7f1-4f5b-b325-28d71812baa6)
+
 - **Downloads page:** https://github.com/UNamurCSFaculty/INFOM227_Animations/releases
 
 ## Requirements
