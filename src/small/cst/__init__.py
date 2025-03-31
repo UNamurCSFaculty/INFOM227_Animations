@@ -15,7 +15,13 @@ def parse(stream: InputStream):
 
     class ErrorListener(ConsoleErrorListener):
         def syntaxError(
-            self, recognizer, offendingSymbol, line, column, msg, e  # noqa: N803
+            self,
+            recognizer,
+            offendingSymbol,  # noqa: N803
+            line,
+            column,
+            msg,
+            e,  # noqa: N803
         ):
             errors.append(f"line {line}:{column} {msg}")
 

@@ -1,51 +1,57 @@
-[tool.poetry]
-name = "infom227_animations"
+[project]
+name = "infom227-animations"
 version = "0.1.0"
-description = ""
-authors = ["Berg Lucas <55436804+BergLucas@users.noreply.github.com>"]
+description = "INFOM277 Animations contains the code to generate animations for the course INFOM227."
+authors = [
+    { name = "Berg Lucas", email = "55436804+BergLucas@users.noreply.github.com" },
+]
 readme = "README.md"
-packages = [{ include = "*" }]
+license = "MIT"
+keywords = ["Poetry", "INFOM227", "Manim"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+]
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "manim (>=0.18.1,<0.19.0)",
+    "manim-dataflow-analysis @ git+https://github.com/BergLucas/manim-dataflow-analysis.git",
+    "antlr4-python3-runtime (>=4.13.2,<5.0.0)",
+]
 
-[tool.poetry.dependencies]
-python = ">=3.11,<3.13"
-manim = "^0.18.1"
-manim-dataflow-analysis = { git = "https://github.com/BergLucas/manim-dataflow-analysis" }
-antlr4-python3-runtime = "^4.13.2"
+[tool.poetry]
+requires-poetry = "^2.0.0"
+packages = [{ include = "small", from = "src" }]
+
+[tool.poetry.requires-plugins]
+poethepoet = "^0.33.0"
 
 [tool.poetry.group.dev.dependencies]
-black = "^23.3.0"
-mypy = "^1.4.1"
-coverage = "^7.2.7"
-ruff = "^0.6.4"
-
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+ruff = "^0.9.10"
+mypy = "^1.15.0"
+coverage = "^7.6.12"
 
 [tool.poe.tasks]
 test = "python -m unittest -v"
 coverage = "coverage run -m unittest -v"
 coverage-report = ["coverage", { cmd = "coverage report" }]
 coverage-html = ["coverage", { cmd = "coverage html" }]
-mypy = "mypy ."
-black = "black ."
-ruff = "ruff check ."
-ruff-fix = "ruff check --fix ."
-ruff-ufix = "ruff check --fix --unsafe-fixes ."
-lint = ["black", "ruff", "mypy"]
-build-small-visitor = "antlr4 -Dlanguage=Python3 -visitor -no-listener -o small/cst small/SmallGrammar.g4"
-
-[tool.black]
-exclude = "small/cst/small/*"
+format = "ruff format src tests"
+check = "ruff check --fix src tests"
+check-nofix = "ruff check src tests"
+check-unsafe = "ruff check --fix --unsafe src tests"
+typecheck = "mypy src tests"
+lint = ["format", "check", "typecheck"]
+verify = ["lint", "test"]
 
 [tool.coverage.run]
-relative_files = true
 branch = true
-source = [".", "tests"]
+source = ["src/small", "tests"]
 
 [tool.ruff]
-exclude = ["small/cst/small/*"]
+exclude = ["src/small/cst/small/*"]
 
 [tool.ruff.lint]
 select = [
@@ -80,4 +86,8 @@ convention = "google"
 
 [tool.mypy]
 ignore_missing_imports = true
-exclude = "small/cst/small/*"
+exclude = "src/small/cst/small/*"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

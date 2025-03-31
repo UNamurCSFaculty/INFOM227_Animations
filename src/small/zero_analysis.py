@@ -119,11 +119,10 @@ class ZeroAnalysisFlowFunction(FlowFunction[ZeroAnalysisValue]):
                 _,
                 Variable(x),
                 IntBinaryExpression(Variable(y), IntBinaryOperator.ADD, Variable(z)),
-            ) if abstract_environment[
-                y
-            ] == ZeroAnalysisValue.Z and abstract_environment[
-                z
-            ] == ZeroAnalysisValue.Z:
+            ) if (
+                abstract_environment[y] == ZeroAnalysisValue.Z
+                and abstract_environment[z] == ZeroAnalysisValue.Z
+            ):
                 return {x: ZeroAnalysisValue.Z}, 5
             case Assignment(
                 _,
