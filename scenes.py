@@ -163,6 +163,22 @@ class ComplexZeroAnalysisScene(AbstractZeroAnalysisScene):
         """
 
 
+class SumIntervalAnalysisScene(AbstractIntervalAnalysisScene):
+    title = "Interval Analysis of the Sum Function"
+
+    program_string = """
+        function sum(n) {
+            i = 0;
+            s = 0;
+            while (i < n) {
+                s = s + i;
+                i = i + 1;
+            }
+            return s;
+        }
+        """
+
+
 class FactorialIntervalAnalysisScene(AbstractIntervalAnalysisScene):
     title = "Interval Analysis of the Factorial Function"
 
