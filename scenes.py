@@ -1,6 +1,5 @@
 from small.interval_analysis import AbstractIntervalAnalysisScene
 from small.zero_analysis import AbstractZeroAnalysisScene
-from manim_dataflow_analysis.lattice import LatticeGraph
 
 
 class IfInWhileZeroAnalysisScene(AbstractZeroAnalysisScene):
